@@ -11,13 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HeroEntity = void 0;
 const typeorm_1 = require("typeorm");
-let HeroEntity = class HeroEntity {
+const clan_entity_1 = require("./clan-entity");
+let HeroEntity = class HeroEntity extends typeorm_1.BaseEntity {
     constructor() {
+        super(...arguments);
         this.heroId = "";
         this.heroName = "";
-        this.heroXP = 10;
-        this.heroHealth = 100;
-        this.heroStrength = 10;
     }
 };
 __decorate([
@@ -56,6 +55,13 @@ __decorate([
     }),
     __metadata("design:type", Number)
 ], HeroEntity.prototype, "heroStrength", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => clan_entity_1.ClanEntity, (clan) => clan.army),
+    (0, typeorm_1.JoinColumn)({
+        name: "ClanFK"
+    }),
+    __metadata("design:type", clan_entity_1.ClanEntity)
+], HeroEntity.prototype, "clanFk", void 0);
 HeroEntity = __decorate([
     (0, typeorm_1.Entity)("Hero")
 ], HeroEntity);

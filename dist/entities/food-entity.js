@@ -11,8 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FoodEntity = void 0;
 const typeorm_1 = require("typeorm");
-let FoodEntity = class FoodEntity {
+const clan_entity_1 = require("./clan-entity");
+let FoodEntity = class FoodEntity extends typeorm_1.BaseEntity {
     constructor() {
+        super(...arguments);
         this.foodId = -1;
         this.foodName = "";
         this.cal = 0;
@@ -38,6 +40,13 @@ __decorate([
     }),
     __metadata("design:type", Number)
 ], FoodEntity.prototype, "cal", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => clan_entity_1.ClanEntity, (clan) => clan.foods),
+    (0, typeorm_1.JoinColumn)({
+        name: "ClanFK"
+    }),
+    __metadata("design:type", clan_entity_1.ClanEntity)
+], FoodEntity.prototype, "clanFk", void 0);
 FoodEntity = __decorate([
     (0, typeorm_1.Entity)("Food")
 ], FoodEntity);

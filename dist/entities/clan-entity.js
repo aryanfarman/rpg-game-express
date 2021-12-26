@@ -11,8 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClanEntity = void 0;
 const typeorm_1 = require("typeorm");
-let ClanEntity = class ClanEntity {
+const hero_entity_1 = require("./hero-entity");
+const food_entity_1 = require("./food-entity");
+const worker_entity_1 = require("./worker-entity");
+const war_entity_1 = require("./war-entity");
+const user_entity_1 = require("./user-entity");
+let ClanEntity = class ClanEntity extends typeorm_1.BaseEntity {
     constructor() {
+        super(...arguments);
         this.clanId = "";
         this.clanName = "";
     }
@@ -30,6 +36,48 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], ClanEntity.prototype, "clanName", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => hero_entity_1.HeroEntity, (hero) => hero.clanFk),
+    __metadata("design:type", Array)
+], ClanEntity.prototype, "army", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => food_entity_1.FoodEntity, (food) => food.clanFk),
+    __metadata("design:type", Array)
+], ClanEntity.prototype, "foods", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => worker_entity_1.WorkerEntity, (worker) => worker.clanFk),
+    __metadata("design:type", Array)
+], ClanEntity.prototype, "workers", void 0);
+__decorate([
+    (0, typeorm_1.ManyToMany)(() => war_entity_1.WarEntity),
+    (0, typeorm_1.JoinTable)({
+        name: "WarResult",
+        joinColumn: {
+            name: "ClanFK",
+            referencedColumnName: "clanId"
+        },
+        inverseJoinColumn: {
+            name: "WarFK",
+            referencedColumnName: "warId"
+        }
+    }),
+    __metadata("design:type", Array)
+], ClanEntity.prototype, "wars", void 0);
+__decorate([
+    (0, typeorm_1.ManyToMany)(() => user_entity_1.UserEntity),
+    (0, typeorm_1.JoinTable)({
+        name: "UserClans",
+        joinColumn: {
+            name: "ClanFK",
+            referencedColumnName: "clanId"
+        },
+        inverseJoinColumn: {
+            name: "UserFK",
+            referencedColumnName: "userId"
+        }
+    }),
+    __metadata("design:type", Array)
+], ClanEntity.prototype, "users", void 0);
 ClanEntity = __decorate([
     (0, typeorm_1.Entity)("Clan")
 ], ClanEntity);
