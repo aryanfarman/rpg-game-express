@@ -8,17 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WorkerController = void 0;
-const express_1 = __importDefault(require("express"));
-const worker_service_1 = require("../services/worker-service");
-const router = express_1.default.Router();
-exports.WorkerController = router;
-const workerService = new worker_service_1.WorkerService();
-router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const worker = yield workerService.insert();
-    return res.json(worker);
-}));
+exports.HeroService = void 0;
+const hero_entity_1 = require("../entities/hero-entity");
+class HeroService {
+    insert(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const hero = hero_entity_1.HeroEntity.create(data);
+            const result = yield hero.save();
+            return result;
+        });
+    }
+    find(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const hero = yield hero_entity_1.HeroEntity.findOne(id);
+            return hero;
+        });
+    }
+}
+exports.HeroService = HeroService;

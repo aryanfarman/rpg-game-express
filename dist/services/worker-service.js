@@ -8,17 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WorkerController = void 0;
-const express_1 = __importDefault(require("express"));
-const worker_service_1 = require("../services/worker-service");
-const router = express_1.default.Router();
-exports.WorkerController = router;
-const workerService = new worker_service_1.WorkerService();
-router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const worker = yield workerService.insert();
-    return res.json(worker);
-}));
+exports.WorkerService = void 0;
+const worker_entity_1 = require("../entities/worker-entity");
+class WorkerService {
+    insert() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const worker = worker_entity_1.WorkerEntity.create();
+            const res = yield worker.save();
+            return res;
+        });
+    }
+    find(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const worker = yield worker_entity_1.WorkerEntity.findOne(id);
+            return worker;
+        });
+    }
+}
+exports.WorkerService = WorkerService;
