@@ -14,14 +14,19 @@ const food_entity_1 = require("../entities/food-entity");
 class FoodService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const food = food_entity_1.FoodEntity.create(data);
-            return yield food.save();
+            const food = yield food_entity_1.FoodEntity.create(data);
+            return food.save();
         });
     }
     find(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const food = yield food_entity_1.FoodEntity.findOne(id);
             return food;
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield food_entity_1.FoodEntity.delete(id);
         });
     }
 }

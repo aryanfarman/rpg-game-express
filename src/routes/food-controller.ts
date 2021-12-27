@@ -13,5 +13,13 @@ router.post("/",async (req,res)=>{
     const result =await foodService.insert(food)
     return res.json(result)
 })
-
+router.delete("/:foodId",async (req,res)=>{
+    const {foodId} = req.params
+    const food = await foodService.find(foodId)
+    if(!food){
+        return res.status(404).send("food does not exist!")
+    }
+    const result  = await foodService.delete(foodId)
+    return res.json({result,food})
+})
 export {router as FoodController}

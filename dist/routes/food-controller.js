@@ -27,3 +27,12 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield foodService.insert(food);
     return res.json(result);
 }));
+router.delete("/:foodId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { foodId } = req.params;
+    const food = yield foodService.find(foodId);
+    if (!food) {
+        return res.status(404).send("food does not exist!");
+    }
+    const result = yield foodService.delete(foodId);
+    return res.json({ result, food });
+}));
