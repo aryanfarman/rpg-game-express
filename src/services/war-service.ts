@@ -7,6 +7,12 @@ export class WarService{
         const war=WarEntity.create(data)
         return await war.save();
     }
+    async find(id:string){
+        return await WarEntity.findOne(id)
+    }
+    async delete(id:string){
+        return await  WarEntity.delete(id)
+    }
 
 
 }

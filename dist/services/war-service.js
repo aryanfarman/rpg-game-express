@@ -18,5 +18,15 @@ class WarService {
             return yield war.save();
         });
     }
+    find(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield war_entity_1.WarEntity.findOne(id);
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield war_entity_1.WarEntity.delete(id);
+        });
+    }
 }
 exports.WarService = WarService;

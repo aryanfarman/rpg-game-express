@@ -26,3 +26,12 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield warService.insert(war);
     return res.json(result);
 }));
+router.delete("/:warId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { warId } = req.params;
+    const war = yield warService.find(warId);
+    if (!war) {
+        return res.status(404).send("war does not exist!");
+    }
+    const result = yield warService.delete(warId);
+    return res.json({ war, result });
+}));

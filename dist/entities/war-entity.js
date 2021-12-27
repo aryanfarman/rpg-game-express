@@ -15,10 +15,10 @@ const clan_entity_1 = require("./clan-entity");
 let WarEntity = class WarEntity extends typeorm_1.BaseEntity {
 };
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)("increment", {
+    (0, typeorm_1.PrimaryGeneratedColumn)("uuid", {
         name: "WarID"
     }),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], WarEntity.prototype, "warId", void 0);
 __decorate([
     (0, typeorm_1.Column)({

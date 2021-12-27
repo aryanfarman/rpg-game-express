@@ -11,5 +11,13 @@ router.post("/",async (req,res)=>{
     const result = await warService.insert(war)
     return res.json(result)
 })
-
+router.delete("/:warId",async (req,res)=>{
+    const {warId}=req.params
+    const war = await warService.find(warId)
+    if(!war){
+        return res.status(404).send("war does not exist!")
+    }
+    const result = await warService.delete(warId)
+    return res.json({war, result})
+})
 export {router as WarController}

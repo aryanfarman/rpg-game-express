@@ -3,9 +3,9 @@ import {ClanEntity} from "./clan-entity";
 
 @Entity("Wars")
 export class WarEntity extends BaseEntity{
-    @PrimaryGeneratedColumn("increment",{
+    @PrimaryGeneratedColumn("uuid",{
         name: "WarID"
-    })warId:number
+    })warId:string
 
     @Column({
         name: "warLocation",
