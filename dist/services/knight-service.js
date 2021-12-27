@@ -11,11 +11,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.KnightService = void 0;
 const knight_entity_1 = require("../entities/knight-entity");
+const hero_entity_1 = require("../entities/hero-entity");
 class KnightService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {
             const knight = yield knight_entity_1.KnightEntity.create(data);
             return yield knight.save();
+        });
+    }
+    find(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield knight_entity_1.KnightEntity.findOne(id);
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return {
+                archerRes: yield knight_entity_1.KnightEntity.delete(id),
+                heroRes: yield hero_entity_1.HeroEntity.delete(id)
+            };
         });
     }
 }

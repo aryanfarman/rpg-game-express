@@ -16,5 +16,14 @@ router.post("/",async (req,res)=>{
     return res.json(result)
 
 })
+router.delete("/:heroId",async (req,res)=>{
+    const {heroId} = req.params
+    const knight = await knightService.find(heroId)
+    if(!knight){
+        return res.status(404).send("knight does not exist!")
+    }
+    const result  = await knightService.delete(heroId)
+    return res.json({result,knight})
+})
 
 export {router as KnightController}
