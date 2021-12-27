@@ -59,20 +59,12 @@ __decorate([
     __metadata("design:type", Array)
 ], ClanEntity.prototype, "wars", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => user_entity_1.UserEntity),
-    (0, typeorm_1.JoinTable)({
-        name: "UserClans",
-        joinColumn: {
-            name: "ClanFK",
-            referencedColumnName: "clanId"
-        },
-        inverseJoinColumn: {
-            name: "UserFK",
-            referencedColumnName: "userId"
-        }
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.UserEntity, (user) => user.clans),
+    (0, typeorm_1.JoinColumn)({
+        name: "userFK"
     }),
-    __metadata("design:type", Array)
-], ClanEntity.prototype, "users", void 0);
+    __metadata("design:type", user_entity_1.UserEntity)
+], ClanEntity.prototype, "userFk", void 0);
 ClanEntity = __decorate([
     (0, typeorm_1.Entity)("Clan")
 ], ClanEntity);

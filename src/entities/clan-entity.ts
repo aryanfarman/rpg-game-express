@@ -1,4 +1,14 @@
-import {BaseEntity, Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {
+    BaseEntity,
+    Column,
+    Entity,
+    JoinColumn,
+    JoinTable,
+    ManyToMany,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn
+} from "typeorm";
 import {HeroEntity} from "./hero-entity";
 import {FoodEntity} from "./food-entity";
 import {WorkerEntity} from "./worker-entity";
@@ -43,17 +53,10 @@ export class ClanEntity extends BaseEntity{
             referencedColumnName:"warId"
         }
     })wars:WarEntity[]
-    @ManyToMany(
-        ()=>UserEntity
-    )@JoinTable({
-        name: "UserClans",
-        joinColumn:{
-            name: "ClanFK",
-            referencedColumnName: "clanId"
-        },
-        inverseJoinColumn:{
-            name: "UserFK",
-            referencedColumnName: "userId"
-        }
-    })users:UserEntity[]
+    @ManyToOne(
+        ()=>UserEntity,
+        (user)=> user.clans
+    )@JoinColumn({
+        name:"userFK"
+    })userFk:UserEntity
 }

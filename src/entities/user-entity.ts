@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {ClanEntity} from "./clan-entity";
 
 @Entity("User")
@@ -15,17 +15,8 @@ export class UserEntity extends BaseEntity{
         name: "UserID"
     })userId:String
 
-    @ManyToMany(
-        ()=>ClanEntity
-    )@JoinTable({
-        name:"UserClans",
-        joinColumn:{
-            name: "UserFK",
-            referencedColumnName: "userId"
-        },
-        inverseJoinColumn:{
-            name:"ClanFK",
-            referencedColumnName:"clanId"
-        }
-    })clans : ClanEntity[]
+    @OneToMany(
+        ()=>ClanEntity,
+        (clan)=> clan.userFk
+    )clans : ClanEntity[]
 }

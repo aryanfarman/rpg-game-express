@@ -35,18 +35,7 @@ __decorate([
     __metadata("design:type", String)
 ], UserEntity.prototype, "userId", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => clan_entity_1.ClanEntity),
-    (0, typeorm_1.JoinTable)({
-        name: "UserClans",
-        joinColumn: {
-            name: "UserFK",
-            referencedColumnName: "userId"
-        },
-        inverseJoinColumn: {
-            name: "ClanFK",
-            referencedColumnName: "clanId"
-        }
-    }),
+    (0, typeorm_1.OneToMany)(() => clan_entity_1.ClanEntity, (clan) => clan.userFk),
     __metadata("design:type", Array)
 ], UserEntity.prototype, "clans", void 0);
 UserEntity = __decorate([
