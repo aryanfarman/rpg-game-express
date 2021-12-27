@@ -13,11 +13,11 @@ import {ClanEntity} from "./clan-entity";
 export class HeroEntity extends BaseEntity{
     @PrimaryGeneratedColumn("uuid",{
         name : "HeroID"
-    })heroId : string = ""
+    })heroId : string
     @Column({
         name : "HeroName",
         type : "nvarchar"
-    })heroName: string=""
+    })heroName: string
     @Column({
         name : "HeroXP",
         type : "int",
@@ -30,7 +30,8 @@ export class HeroEntity extends BaseEntity{
     })heroHealth : number
     @Column({
         name : "HeroStrength",
-        type : "int"
+        type : "int",
+        default : 20
     })heroStrength : number
     @ManyToOne(()=>ClanEntity , (clan)=>clan.army)
     @JoinColumn({

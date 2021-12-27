@@ -16,9 +16,11 @@ exports.UserController = void 0;
 const express_1 = __importDefault(require("express"));
 const user_service_1 = require("../services/user-service");
 const user_entity_1 = require("../entities/user-entity");
+const clan_service_1 = require("../services/clan-service");
 const router = express_1.default.Router();
 exports.UserController = router;
 const userService = new user_service_1.UserService();
+const clanService = new clan_service_1.ClanService();
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email } = req.body;
     const user = new user_entity_1.UserEntity();
@@ -26,4 +28,17 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     user.name = name;
     const result = user_entity_1.UserEntity.create(user);
     return res.json(result);
+}));
+router.put("/:clanId/new-clan/:userId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { clanId, userId } = req.body;
+    const clan = yield clanService.find(clanId);
+    const user = yield userService.find(userId);
+    if (!clan) {
+        res.status(404).send("clan does not exist!");
+    }
+    if (!user) {
+        res.status(404).send("user does not exist!");
+    }
+    const result = yield userService.addClan(user, clan);
+    return res.send(result);
 }));

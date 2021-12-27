@@ -13,11 +13,6 @@ exports.HeroEntity = void 0;
 const typeorm_1 = require("typeorm");
 const clan_entity_1 = require("./clan-entity");
 let HeroEntity = class HeroEntity extends typeorm_1.BaseEntity {
-    constructor() {
-        super(...arguments);
-        this.heroId = "";
-        this.heroName = "";
-    }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid", {
@@ -51,7 +46,8 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({
         name: "HeroStrength",
-        type: "int"
+        type: "int",
+        default: 20
     }),
     __metadata("design:type", Number)
 ], HeroEntity.prototype, "heroStrength", void 0);

@@ -12,7 +12,7 @@ const heroService = new HeroService()
 const foodService = new FoodService()
 const workerService = new WorkerService()
 router.post("/",async (req,res)=>{
-    const {clanName}=req.body
+    const { clanName } = req.body
     const clan=new ClanEntity()
     clan.clanName=clanName
     const result = await clanService.insert(clan)
@@ -63,7 +63,7 @@ router.put("/:clanId/new-worker/:workerId",async (req,res)=>{
         res.status(404).send("worker does not exist")
     }
     const result = await clanService.addWorker(clan,worker)
-    return result
+    return res.json(result)
 })
 
 export {router as ClanController}

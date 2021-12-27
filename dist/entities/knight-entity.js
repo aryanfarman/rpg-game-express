@@ -13,10 +13,6 @@ exports.KnightEntity = void 0;
 const typeorm_1 = require("typeorm");
 const hero_entity_1 = require("./hero-entity");
 let KnightEntity = class KnightEntity extends hero_entity_1.HeroEntity {
-    constructor() {
-        super(...arguments);
-        this.Sword = 5;
-    }
 };
 __decorate([
     (0, typeorm_1.Column)({

@@ -69,5 +69,5 @@ router.put("/:clanId/new-worker/:workerId", (req, res) => __awaiter(void 0, void
         res.status(404).send("worker does not exist");
     }
     const result = yield clanService.addWorker(clan, worker);
-    return result;
+    return res.json(result);
 }));

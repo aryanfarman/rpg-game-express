@@ -5,15 +5,15 @@ import {ClanEntity} from "./clan-entity";
 export class FoodEntity extends BaseEntity{
     @PrimaryGeneratedColumn("increment",{
         name:"FoodID"
-    })foodId : number = -1
+    })foodId : number
     @Column({
         name: "FoodName",
         type: "varchar"
-    })foodName : string = ""
+    })foodName : string
     @Column({
         name : "FoodCalorie",
         type : "int"
-    })cal : number = 0
+    })cal : number
     @ManyToOne(
         ()=> ClanEntity,
         (clan)=>clan.foods

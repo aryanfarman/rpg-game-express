@@ -17,11 +17,6 @@ const worker_entity_1 = require("./worker-entity");
 const war_entity_1 = require("./war-entity");
 const user_entity_1 = require("./user-entity");
 let ClanEntity = class ClanEntity extends typeorm_1.BaseEntity {
-    constructor() {
-        super(...arguments);
-        this.clanId = "";
-        this.clanName = "";
-    }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid", {

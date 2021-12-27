@@ -13,12 +13,6 @@ exports.FoodEntity = void 0;
 const typeorm_1 = require("typeorm");
 const clan_entity_1 = require("./clan-entity");
 let FoodEntity = class FoodEntity extends typeorm_1.BaseEntity {
-    constructor() {
-        super(...arguments);
-        this.foodId = -1;
-        this.foodName = "";
-        this.cal = 0;
-    }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("increment", {

@@ -20,7 +20,6 @@ const dbPort = process.env.DB_PORT as string
 const port = process.env.PORT || 3000;
 
 const app = express()
-app.use(express.json())
 
 
 
@@ -42,7 +41,7 @@ config();
             entities : [HeroEntity,ClanEntity,FoodEntity,ArcherEntity,KnightEntity,SoldierEntity,WorkerEntity,WarEntity,UserEntity]
         })
         console.log("database connected !");
-
+        app.use(express.json())
         app.use("/api/hero", HeroController);
         app.use("/api/clan", ClanController);
         app.use("/api/user", UserController);

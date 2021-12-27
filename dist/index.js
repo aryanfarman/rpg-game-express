@@ -33,7 +33,6 @@ const war_controller_1 = require("./routes/war-controller");
 const dbPort = process.env.DB_PORT;
 const port = process.env.PORT || 3000;
 const app = (0, express_1.default)();
-app.use(express_1.default.json());
 (0, dotenv_1.config)();
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -51,6 +50,7 @@ app.use(express_1.default.json());
             entities: [hero_entity_1.HeroEntity, clan_entity_1.ClanEntity, food_entity_1.FoodEntity, archer_entity_1.ArcherEntity, knight_entity_1.KnightEntity, soldier_entity_1.SoldierEntity, worker_entity_1.WorkerEntity, war_entity_1.WarEntity, user_entity_1.UserEntity]
         });
         console.log("database connected !");
+        app.use(express_1.default.json());
         app.use("/api/hero", hero_controller_1.HeroController);
         app.use("/api/clan", clan_controller_1.ClanController);
         app.use("/api/user", user_controller_1.UserController);

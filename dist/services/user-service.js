@@ -25,5 +25,17 @@ class UserService {
             return user;
         });
     }
+    addClan(user, clan) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!user.clans) {
+                user.clans.push(clan);
+            }
+            else {
+                user.clans = [clan];
+            }
+            const res = yield user.save();
+            return res;
+        });
+    }
 }
 exports.UserService = UserService;

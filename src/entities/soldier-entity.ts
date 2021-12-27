@@ -8,5 +8,5 @@ export class SoldierEntity extends HeroEntity{
         name: "SoldierSword",
         type: "int",
         default: 1
-    }) Sword: number = 1
+    }) Sword: number
 }

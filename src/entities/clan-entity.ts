@@ -9,11 +9,11 @@ import {UserEntity} from "./user-entity";
 export class ClanEntity extends BaseEntity{
     @PrimaryGeneratedColumn("uuid",{
         name : "ClanID"
-    })clanId : string = ""
+    })clanId : string
     @Column({
         name : "ClanName",
         type : "nvarchar"
-    })clanName: string = ""
+    })clanName: string
 
     @OneToMany(
         ()=>HeroEntity ,
