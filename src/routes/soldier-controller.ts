@@ -14,6 +14,15 @@ router.post("/",async (req,res)=>{
     return res.json(result)
 })
 
+router.delete("/:heroId",async (req,res)=>{
+    const {heroId} = req.params
+    const soldier = await soldierService.find(heroId)
+    if(!soldier){
+        return res.status(404).send("archer does not exist!")
+    }
+    const result  = await soldierService.delete(heroId)
+    return res.json({result,soldier})
+})
 
 
 
