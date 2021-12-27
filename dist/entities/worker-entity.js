@@ -15,10 +15,10 @@ const clan_entity_1 = require("./clan-entity");
 let WorkerEntity = class WorkerEntity extends typeorm_1.BaseEntity {
 };
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)("increment", {
+    (0, typeorm_1.PrimaryGeneratedColumn)("uuid", {
         name: "WorkerID"
     }),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], WorkerEntity.prototype, "workerId", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => clan_entity_1.ClanEntity, (clan) => clan.workers),

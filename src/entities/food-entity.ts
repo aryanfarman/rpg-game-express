@@ -3,9 +3,9 @@ import {ClanEntity} from "./clan-entity";
 
 @Entity("Food")
 export class FoodEntity extends BaseEntity{
-    @PrimaryGeneratedColumn("increment",{
+    @PrimaryGeneratedColumn("uuid",{
         name:"FoodID"
-    })foodId : number
+    })foodId : string
     @Column({
         name: "FoodName",
         type: "varchar"

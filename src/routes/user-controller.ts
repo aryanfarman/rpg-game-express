@@ -11,7 +11,7 @@ router.post("/",async (req,res)=>{
     const user = new UserEntity()
     user.email = email
     user.name = name
-    const result = UserEntity.create(user)
+    const result = await userService.insert(user)
     return res.json(result)
 })
 router.put("/:clanId/new-clan/:userId",async (req,res)=>{

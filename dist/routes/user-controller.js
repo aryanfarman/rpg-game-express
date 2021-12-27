@@ -26,7 +26,7 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = new user_entity_1.UserEntity();
     user.email = email;
     user.name = name;
-    const result = user_entity_1.UserEntity.create(user);
+    const result = yield userService.insert(user);
     return res.json(result);
 }));
 router.put("/:clanId/new-clan/:userId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

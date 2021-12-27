@@ -3,9 +3,9 @@ import {ClanEntity} from "./clan-entity";
 
 @Entity("Worker")
 export class WorkerEntity extends BaseEntity{
-    @PrimaryGeneratedColumn("increment",{
+    @PrimaryGeneratedColumn("uuid",{
         name:"WorkerID"
-    })private workerId : number
+    })workerId : string
     @ManyToOne(()=>ClanEntity,
         (clan)=>clan.workers
     )@JoinColumn({

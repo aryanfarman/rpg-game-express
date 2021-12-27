@@ -6,7 +6,7 @@ export class WorkerService{
         const res = await worker.save()
         return res
     }
-    async find (id : number){
+    async find (id : string){
         const worker= await WorkerEntity.findOne(id)
         return worker;
     }

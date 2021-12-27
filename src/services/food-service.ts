@@ -9,7 +9,7 @@ export class FoodService{
         return res;
     }
 
-    async find(id:number){
+    async find(id:string){
         const food = await FoodEntity.findOne(id)
         return food
     }

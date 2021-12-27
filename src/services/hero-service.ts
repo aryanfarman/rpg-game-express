@@ -9,7 +9,7 @@ export class HeroService{
         return result;
     }
 
-    async find(id:number){
+    async find(id:string){
 
         const hero = await HeroEntity.findOne(id)
         return hero;

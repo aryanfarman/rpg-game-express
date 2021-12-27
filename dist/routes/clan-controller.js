@@ -33,7 +33,7 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.json(result);
 }));
 router.put("/:clanId/new-hero/:heroId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { clanId, heroId } = req.body;
+    const { clanId, heroId } = req.params;
     const clan = yield clanService.find(clanId);
     const hero = yield heroService.find(heroId);
     if (!clan) {
@@ -46,7 +46,7 @@ router.put("/:clanId/new-hero/:heroId", (req, res) => __awaiter(void 0, void 0, 
     return res.json(result);
 }));
 router.put("/:clanId/new-food/:foodId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { clanId, foodId } = req.body;
+    const { clanId, foodId } = req.params;
     const clan = yield clanService.find(clanId);
     const food = yield foodService.find(foodId);
     if (!clan) {
@@ -59,7 +59,7 @@ router.put("/:clanId/new-food/:foodId", (req, res) => __awaiter(void 0, void 0, 
     return res.json(result);
 }));
 router.put("/:clanId/new-worker/:workerId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { clanId, workerId } = req.body;
+    const { clanId, workerId } = req.params;
     const clan = yield clanService.find(clanId);
     const worker = yield workerService.find(workerId);
     if (!clan) {

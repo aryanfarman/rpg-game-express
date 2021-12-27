@@ -21,7 +21,7 @@ router.post("/",async (req,res)=>{
 })
 
 router.put("/:clanId/new-hero/:heroId",async (req,res)=>{
-    const {clanId , heroId}= req.body
+    const {clanId , heroId}= req.params
     const clan=await clanService.find(clanId)
     const hero = await heroService.find(heroId)
     if(!clan){
@@ -36,7 +36,7 @@ router.put("/:clanId/new-hero/:heroId",async (req,res)=>{
 })
 
 router.put("/:clanId/new-food/:foodId",async (req,res)=>{
-    const {clanId,foodId} = req.body
+    const {clanId,foodId} = req.params
     const clan = await clanService.find(clanId)
     const food = await foodService.find(foodId)
 
@@ -52,7 +52,7 @@ router.put("/:clanId/new-food/:foodId",async (req,res)=>{
 })
 
 router.put("/:clanId/new-worker/:workerId",async (req,res)=>{
-    const {clanId,workerId} = req.body
+    const {clanId,workerId} = req.params
     const clan = await clanService.find(clanId)
     const worker = await workerService.find(workerId)
 
