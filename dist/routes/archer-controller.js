@@ -29,3 +29,12 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield heroService.insert(result);
     return res.json(result);
 }));
+router.delete("/:heroId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { heroId } = req.params;
+    const archer = yield archerService.find(heroId);
+    if (!archer) {
+        return res.status(404).send("archer does not exist!");
+    }
+    const result = yield archerService.delete(heroId);
+    return res.json({ result, archer });
+}));

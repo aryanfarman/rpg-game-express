@@ -16,6 +16,14 @@ router.post("/",async (req,res)=>{
     return res.json(result)
 
 })
-
+router.delete("/:heroId",async (req,res)=>{
+    const {heroId} = req.params
+    const archer = await archerService.find(heroId)
+    if(!archer){
+        return res.status(404).send("archer does not exist!")
+    }
+    const result  = await archerService.delete(heroId)
+    return res.json({result,archer})
+})
 
 export {router as ArcherController}
