@@ -20,8 +20,12 @@ class WorkerService {
     }
     find(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const worker = yield worker_entity_1.WorkerEntity.findOne(id);
-            return worker;
+            return yield worker_entity_1.WorkerEntity.findOne(id);
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield worker_entity_1.WorkerEntity.delete(id);
         });
     }
 }

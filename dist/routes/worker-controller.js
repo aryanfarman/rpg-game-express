@@ -22,3 +22,12 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const worker = yield workerService.insert();
     return res.json(worker);
 }));
+router.delete("/:workerId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { workerId } = req.params;
+    const worker = yield workerService.find(workerId);
+    if (!worker) {
+        return res.status(404).send("archer does not exist!");
+    }
+    const result = yield workerService.delete(workerId);
+    return res.json({ result, worker });
+}));
