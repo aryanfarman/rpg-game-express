@@ -14,24 +14,31 @@ const user_entity_1 = require("../entities/user-entity");
 class UserService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = user_entity_1.UserEntity.create(data);
+            const user = yield user_entity_1.UserEntity.create(data);
             return yield user.save();
         });
     }
     find(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return user_entity_1.UserEntity.findOne(id);
+            return yield user_entity_1.UserEntity.findOne(id, {
+                relations: ["clans"]
+            });
         });
     }
     addClan(user, clan) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!user.clans) {
+            if (user.clans != undefined) {
                 user.clans.push(clan);
             }
             else {
                 user.clans = [clan];
             }
             return yield user.save();
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield user_entity_1.UserEntity.delete(id);
         });
     }
 }

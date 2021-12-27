@@ -29,16 +29,30 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield userService.insert(user);
     return res.json(result);
 }));
-router.put("/:clanId/new-clan/:userId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { clanId, userId } = req.body;
+router.put("/:userId/new-clan/:clanId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId, clanId } = req.params;
     const clan = yield clanService.find(clanId);
     const user = yield userService.find(userId);
     if (!clan) {
-        res.status(404).send("clan does not exist!");
+        return res.status(404).send("clan does not exist!");
     }
     if (!user) {
-        res.status(404).send("user does not exist!");
+        return res.status(404).send("user does not exist!");
     }
     const result = yield userService.addClan(user, clan);
-    return res.send(result);
+    return res.json(result);
+}));
+router.delete("/:userId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { userId } = req.params;
+        const user = yield userService.find(userId);
+        if (!user) {
+            return res.status(404).send("user does not exist!");
+        }
+        const result = yield userService.delete(userId);
+        return res.json({ user, result });
+    }
+    catch (e) {
+        res.send(e);
+    }
 }));

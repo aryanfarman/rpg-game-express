@@ -59,7 +59,9 @@ __decorate([
     __metadata("design:type", Array)
 ], ClanEntity.prototype, "wars", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.UserEntity, (user) => user.clans),
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.UserEntity, (user) => user.clans, {
+        onDelete: "SET NULL"
+    }),
     (0, typeorm_1.JoinColumn)({
         name: "userFK"
     }),

@@ -55,7 +55,9 @@ export class ClanEntity extends BaseEntity{
     })wars:WarEntity[]
     @ManyToOne(
         ()=>UserEntity,
-        (user)=> user.clans
+        (user)=> user.clans,{
+            onDelete:"SET NULL"
+        }
     )@JoinColumn({
         name:"userFK"
     })userFk:UserEntity
