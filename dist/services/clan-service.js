@@ -25,5 +25,41 @@ class ClanService {
             return clan;
         });
     }
+    addHero(clan, hero) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!clan.army) {
+                clan.army.push(hero);
+            }
+            else {
+                clan.army = [hero];
+            }
+            yield clan.save();
+            return clan;
+        });
+    }
+    addFood(clan, food) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!clan.foods) {
+                clan.foods.push(food);
+            }
+            else {
+                clan.foods = [food];
+            }
+            yield clan.save();
+            return clan;
+        });
+    }
+    addWorker(clan, worker) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!clan.workers) {
+                clan.workers.push(worker);
+            }
+            else {
+                clan.workers = [worker];
+            }
+            yield clan.save();
+            return clan;
+        });
+    }
 }
 exports.ClanService = ClanService;
