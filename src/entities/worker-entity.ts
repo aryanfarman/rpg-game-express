@@ -7,7 +7,9 @@ export class WorkerEntity extends BaseEntity{
         name:"WorkerID"
     })workerId : string
     @ManyToOne(()=>ClanEntity,
-        (clan)=>clan.workers
+        (clan)=>clan.workers,{
+            onDelete:"SET NULL"
+        }
     )@JoinColumn({
         name : "ClanFK"
     })clanFk : ClanEntity

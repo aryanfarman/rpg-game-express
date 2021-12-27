@@ -65,5 +65,18 @@ router.put("/:clanId/new-worker/:workerId",async (req,res)=>{
     const result = await clanService.addWorker(clan,worker)
     return res.json(result)
 })
+router.delete("/:clanId",async (req,res)=>{
+    try {
+        const {clanId} = req.params
+        const clan= await clanService.find(clanId)
+        if(!clan){
+            return res.status(404).send("clan does not exist!")
+        }
+        const result =await clanService.delete(clanId)
+        return res.json({clan,result})
+    }catch (e: Error|any){
+        res.status(500).send(e)
+    }
 
+})
 export {router as ClanController}

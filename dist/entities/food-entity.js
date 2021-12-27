@@ -35,7 +35,9 @@ __decorate([
     __metadata("design:type", Number)
 ], FoodEntity.prototype, "cal", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => clan_entity_1.ClanEntity, (clan) => clan.foods),
+    (0, typeorm_1.ManyToOne)(() => clan_entity_1.ClanEntity, (clan) => clan.foods, {
+        onDelete: "SET NULL"
+    }),
     (0, typeorm_1.JoinColumn)({
         name: "ClanFK"
     }),

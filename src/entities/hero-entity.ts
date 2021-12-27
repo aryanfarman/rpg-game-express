@@ -33,7 +33,9 @@ export class HeroEntity extends BaseEntity{
         type : "int",
         default : 20
     })heroStrength : number
-    @ManyToOne(()=>ClanEntity , (clan)=>clan.army)
+    @ManyToOne(()=>ClanEntity , (clan)=>clan.army,{
+        onDelete : "SET NULL"
+    })
     @JoinColumn({
         name:"ClanFK"
     })clanFk: ClanEntity;

@@ -63,5 +63,10 @@ class ClanService {
             return clan;
         });
     }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield clan_entity_1.ClanEntity.delete(id);
+        });
+    }
 }
 exports.ClanService = ClanService;

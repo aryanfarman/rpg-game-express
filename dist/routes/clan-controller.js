@@ -71,3 +71,17 @@ router.put("/:clanId/new-worker/:workerId", (req, res) => __awaiter(void 0, void
     const result = yield clanService.addWorker(clan, worker);
     return res.json(result);
 }));
+router.delete("/:clanId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { clanId } = req.params;
+        const clan = yield clanService.find(clanId);
+        if (!clan) {
+            return res.status(404).send("clan does not exist!");
+        }
+        const result = yield clanService.delete(clanId);
+        return res.json({ clan, result });
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+}));

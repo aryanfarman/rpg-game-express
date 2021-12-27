@@ -21,7 +21,9 @@ __decorate([
     __metadata("design:type", String)
 ], WorkerEntity.prototype, "workerId", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => clan_entity_1.ClanEntity, (clan) => clan.workers),
+    (0, typeorm_1.ManyToOne)(() => clan_entity_1.ClanEntity, (clan) => clan.workers, {
+        onDelete: "SET NULL"
+    }),
     (0, typeorm_1.JoinColumn)({
         name: "ClanFK"
     }),

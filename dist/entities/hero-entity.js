@@ -52,7 +52,9 @@ __decorate([
     __metadata("design:type", Number)
 ], HeroEntity.prototype, "heroStrength", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => clan_entity_1.ClanEntity, (clan) => clan.army),
+    (0, typeorm_1.ManyToOne)(() => clan_entity_1.ClanEntity, (clan) => clan.army, {
+        onDelete: "SET NULL"
+    }),
     (0, typeorm_1.JoinColumn)({
         name: "ClanFK"
     }),

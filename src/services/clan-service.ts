@@ -48,6 +48,9 @@ export class ClanService{
         return clan
 
     }
+    async delete(id:string){
+        return await ClanEntity.delete(id);
+    }
 
 
 

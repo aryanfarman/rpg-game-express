@@ -16,7 +16,9 @@ export class FoodEntity extends BaseEntity{
     })cal : number
     @ManyToOne(
         ()=> ClanEntity,
-        (clan)=>clan.foods
+        (clan)=>clan.foods,{
+            onDelete:"SET NULL"
+        }
     )@JoinColumn({
         name : "ClanFK"
     })clanFk : ClanEntity
