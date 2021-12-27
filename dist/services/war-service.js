@@ -15,8 +15,7 @@ class WarService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {
             const war = war_entity_1.WarEntity.create(data);
-            const res = yield war.save();
-            return res;
+            return yield war.save();
         });
     }
 }

@@ -21,13 +21,15 @@ class ClanService {
     }
     find(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const clan = clan_entity_1.ClanEntity.findOne(id);
+            const clan = clan_entity_1.ClanEntity.findOne(id, {
+                relations: ["army", "foods", "workers"]
+            });
             return clan;
         });
     }
     addHero(clan, hero) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!clan.army) {
+            if (clan.army != undefined) {
                 clan.army.push(hero);
             }
             else {
@@ -39,7 +41,7 @@ class ClanService {
     }
     addFood(clan, food) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!clan.foods) {
+            if (clan.foods != undefined) {
                 clan.foods.push(food);
             }
             else {
@@ -51,7 +53,7 @@ class ClanService {
     }
     addWorker(clan, worker) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!clan.workers) {
+            if (clan.workers != undefined) {
                 clan.workers.push(worker);
             }
             else {

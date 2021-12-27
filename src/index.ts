@@ -10,12 +10,14 @@ import {FoodEntity} from "./entities/food-entity";
 import {WorkerEntity} from "./entities/worker-entity";
 import {WarEntity} from "./entities/war-entity";
 import {UserEntity} from "./entities/user-entity";
-import {HeroController} from "./routes/hero-controller";
 import {ClanController} from "./routes/clan-controller";
 import {UserController} from "./routes/user-controller";
 import {WorkerController} from "./routes/worker-controller";
 import {FoodController} from "./routes/food-controller";
 import {WarController} from "./routes/war-controller";
+import {KnightController} from "./routes/knight-controller";
+import {ArcherController} from "./routes/archer-controller";
+import {SoldierController} from "./routes/soldier-controller";
 const dbPort = process.env.DB_PORT as string
 const port = process.env.PORT || 3000;
 
@@ -42,7 +44,9 @@ config();
         })
         console.log("database connected !");
         app.use(express.json())
-        app.use("/api/hero", HeroController);
+        app.use("/api/hero/Archer", ArcherController);
+        app.use("/api/hero/knight",KnightController);
+        app.use("/api/hero/soldier",SoldierController);
         app.use("/api/clan", ClanController);
         app.use("/api/user", UserController);
         app.use("/api/food", FoodController);

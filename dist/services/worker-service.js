@@ -15,8 +15,7 @@ class WorkerService {
     insert() {
         return __awaiter(this, void 0, void 0, function* () {
             const worker = worker_entity_1.WorkerEntity.create();
-            const res = yield worker.save();
-            return res;
+            return yield worker.save();
         });
     }
     find(id) {

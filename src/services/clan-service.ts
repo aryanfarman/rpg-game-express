@@ -12,11 +12,13 @@ export class ClanService{
 
     }
     async find(id:string){
-        const clan = ClanEntity.findOne(id)
+        const clan = ClanEntity.findOne(id,{
+            relations : ["army","foods","workers"]
+        })
         return clan
     }
     async addHero(clan:ClanEntity,hero:HeroEntity){
-        if(!clan.army){
+        if(clan.army != undefined){
             clan.army.push(hero)
         }
         else{
@@ -27,7 +29,7 @@ export class ClanService{
         return clan;
     }
     async addFood(clan:ClanEntity,food:FoodEntity){
-        if(!clan.foods){
+        if(clan.foods != undefined){
             clan.foods.push(food)
         }
         else {
@@ -37,7 +39,7 @@ export class ClanService{
         return clan;
     }
     async addWorker(clan:ClanEntity,worker:WorkerEntity){
-        if(!clan.workers){
+        if(clan.workers != undefined){
             clan.workers.push(worker)
         }else {
             clan.workers= [worker]

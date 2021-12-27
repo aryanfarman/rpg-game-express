@@ -5,13 +5,11 @@ import {ClanEntity} from "../entities/clan-entity";
 export class UserService{
     async insert(data:UserEntity){
         const user = UserEntity.create(data)
-        const res =await user.save()
-        return res;
+        return await user.save();
 
     }
     async find(id:string){
-        const user = UserEntity.findOne(id)
-        return user;
+        return UserEntity.findOne(id);
     }
     async addClan(user:UserEntity,clan:ClanEntity){
         if(!user.clans){
@@ -19,8 +17,7 @@ export class UserService{
         }else {
             user.clans = [clan]
         }
-        const res= await user.save()
-        return res
+        return await user.save()
 
     }
 

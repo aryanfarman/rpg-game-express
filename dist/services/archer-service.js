@@ -9,19 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HeroService = void 0;
-const hero_entity_1 = require("../entities/hero-entity");
-class HeroService {
+exports.ArcherService = void 0;
+const archer_entity_1 = require("../entities/archer-entity");
+class ArcherService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const hero = hero_entity_1.HeroEntity.create(data);
-            return yield hero.save();
-        });
-    }
-    find(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield hero_entity_1.HeroEntity.findOne(id);
+            const archer = archer_entity_1.ArcherEntity.create(data);
+            return yield archer.save();
         });
     }
 }
-exports.HeroService = HeroService;
+exports.ArcherService = ArcherService;

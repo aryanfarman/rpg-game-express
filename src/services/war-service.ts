@@ -5,8 +5,7 @@ export class WarService{
 
     async insert(data:WarEntity){
         const war=WarEntity.create(data)
-        const res= await war.save()
-        return res;
+        return await war.save();
     }
 
 

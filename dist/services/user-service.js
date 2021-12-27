@@ -15,14 +15,12 @@ class UserService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {
             const user = user_entity_1.UserEntity.create(data);
-            const res = yield user.save();
-            return res;
+            return yield user.save();
         });
     }
     find(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = user_entity_1.UserEntity.findOne(id);
-            return user;
+            return user_entity_1.UserEntity.findOne(id);
         });
     }
     addClan(user, clan) {
@@ -33,8 +31,7 @@ class UserService {
             else {
                 user.clans = [clan];
             }
-            const res = yield user.save();
-            return res;
+            return yield user.save();
         });
     }
 }

@@ -1,18 +1,17 @@
 import {HeroEntity} from "../entities/hero-entity";
 
 
-export class HeroService{
+export class HeroService {
 
     async insert(data:HeroEntity){
         const hero = HeroEntity.create(data)
-        const result =await hero.save()
-        return result;
+        return await hero.save();
     }
 
     async find(id:string){
 
-        const hero = await HeroEntity.findOne(id)
-        return hero;
+        return await HeroEntity.findOne(id);
+
 
     }
 

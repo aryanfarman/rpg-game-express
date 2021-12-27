@@ -15,8 +15,7 @@ class FoodService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {
             const food = food_entity_1.FoodEntity.create(data);
-            const res = yield food.save();
-            return res;
+            return yield food.save();
         });
     }
     find(id) {

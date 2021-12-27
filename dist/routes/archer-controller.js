@@ -12,17 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HeroController = void 0;
+exports.ArcherController = void 0;
 const express_1 = __importDefault(require("express"));
+const archer_entity_1 = require("../entities/archer-entity");
+const archer_service_1 = require("../services/archer-service");
 const hero_service_1 = require("../services/hero-service");
-const hero_entity_1 = require("../entities/hero-entity");
 const router = express_1.default.Router();
-exports.HeroController = router;
+exports.ArcherController = router;
+const archerService = new archer_service_1.ArcherService();
 const heroService = new hero_service_1.HeroService();
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { heroName } = req.body;
-    const hero = new hero_entity_1.HeroEntity();
-    hero.heroName = heroName;
-    const result = yield heroService.insert(hero);
+    const { heroName } = yield req.body;
+    const archer = new archer_entity_1.ArcherEntity();
+    archer.heroName = heroName;
+    const result = yield archerService.insert(archer);
+    yield heroService.insert(result);
     return res.json(result);
 }));

@@ -5,8 +5,7 @@ export class FoodService{
 
     async insert(data: FoodEntity){
         const food= FoodEntity.create(data)
-        const res=await food.save()
-        return res;
+        return await food.save();
     }
 
     async find(id:string){
