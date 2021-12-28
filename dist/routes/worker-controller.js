@@ -19,15 +19,25 @@ const router = express_1.default.Router();
 exports.WorkerController = router;
 const workerService = new worker_service_1.WorkerService();
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const worker = yield workerService.insert();
-    return res.json(worker);
+    try {
+        const worker = yield workerService.insert();
+        return res.json(worker);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
 }));
 router.delete("/:workerId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { workerId } = req.params;
-    const worker = yield workerService.find(workerId);
-    if (!worker) {
-        return res.status(404).send("archer does not exist!");
+    try {
+        const { workerId } = req.params;
+        const worker = yield workerService.find(workerId);
+        if (!worker) {
+            return res.status(404).send("worker does not exist!");
+        }
+        const result = yield workerService.delete(workerId);
+        return res.json({ result, worker });
     }
-    const result = yield workerService.delete(workerId);
-    return res.json({ result, worker });
+    catch (e) {
+        res.status(500).send(e);
+    }
 }));

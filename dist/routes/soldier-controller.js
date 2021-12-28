@@ -22,19 +22,29 @@ exports.SoldierController = router;
 const soldierService = new soldier_service_1.SoldierService();
 const heroService = new hero_service_1.HeroService();
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { heroName } = req.body;
-    const soldier = new soldier_entity_1.SoldierEntity();
-    soldier.heroName = heroName;
-    const result = yield soldierService.insert(soldier);
-    yield heroService.insert(result);
-    return res.json(result);
+    try {
+        const { heroName } = req.body;
+        const soldier = new soldier_entity_1.SoldierEntity();
+        soldier.heroName = heroName;
+        const result = yield soldierService.insert(soldier);
+        yield heroService.insert(result);
+        return res.json(result);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
 }));
 router.delete("/:heroId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { heroId } = req.params;
-    const soldier = yield soldierService.find(heroId);
-    if (!soldier) {
-        return res.status(404).send("archer does not exist!");
+    try {
+        const { heroId } = req.params;
+        const soldier = yield soldierService.find(heroId);
+        if (!soldier) {
+            return res.status(404).send("soldier does not exist!");
+        }
+        const result = yield soldierService.delete(heroId);
+        return res.json({ result, soldier });
     }
-    const result = yield soldierService.delete(heroId);
-    return res.json({ result, soldier });
+    catch (e) {
+        res.status(500).send(e);
+    }
 }));

@@ -22,19 +22,29 @@ exports.ArcherController = router;
 const archerService = new archer_service_1.ArcherService();
 const heroService = new hero_service_1.HeroService();
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { heroName } = yield req.body;
-    const archer = new archer_entity_1.ArcherEntity();
-    archer.heroName = heroName;
-    const result = yield archerService.insert(archer);
-    yield heroService.insert(result);
-    return res.json(result);
+    try {
+        const { heroName } = yield req.body;
+        const archer = new archer_entity_1.ArcherEntity();
+        archer.heroName = heroName;
+        const result = yield archerService.insert(archer);
+        yield heroService.insert(result);
+        return res.json(result);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
 }));
 router.delete("/:heroId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { heroId } = req.params;
-    const archer = yield archerService.find(heroId);
-    if (!archer) {
-        return res.status(404).send("archer does not exist!");
+    try {
+        const { heroId } = req.params;
+        const archer = yield archerService.find(heroId);
+        if (!archer) {
+            return res.status(404).send("archer does not exist!");
+        }
+        const result = yield archerService.delete(heroId);
+        return res.json({ result, archer });
     }
-    const result = yield archerService.delete(heroId);
-    return res.json({ result, archer });
+    catch (e) {
+        res.status(500).send(e);
+    }
 }));

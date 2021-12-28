@@ -20,9 +20,14 @@ const router = express_1.default.Router();
 exports.HeroController = router;
 const heroService = new hero_service_1.HeroService();
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { heroName } = req.body;
-    const hero = new hero_entity_1.HeroEntity();
-    hero.heroName = heroName;
-    const result = yield heroService.insert(hero);
-    return res.json(result);
+    try {
+        const { heroName } = req.body;
+        const hero = new hero_entity_1.HeroEntity();
+        hero.heroName = heroName;
+        const result = yield heroService.insert(hero);
+        return res.json(result);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
 }));

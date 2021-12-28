@@ -15,17 +15,22 @@ router.post("/",async (req,res)=>{
     return res.json(result)
 })
 router.put("/:userId/new-clan/:clanId",async (req,res)=>{
-    const {userId,clanId}=req.params
-    const clan = await clanService.find(clanId)
-    const user = await userService.find(userId)
-    if(!clan){
-        return res.status(404).send("clan does not exist!")
+    try {
+
+        const {userId, clanId} = req.params
+        const clan = await clanService.find(clanId)
+        const user = await userService.find(userId)
+        if (!clan) {
+            return res.status(404).send("clan does not exist!")
+        }
+        if (!user) {
+            return res.status(404).send("user does not exist!")
+        }
+        const result = await userService.addClan(user, clan)
+        return res.json(result)
+    }catch (e: Error|any){
+        res.status(500).send(e)
     }
-    if(!user){
-        return res.status(404).send("user does not exist!")
-    }
-    const result =await userService.addClan(user,clan)
-    return res.json(result)
 })
 router.delete("/:userId",async (req,res)=>{
     try{
@@ -36,8 +41,8 @@ router.delete("/:userId",async (req,res)=>{
         }
         const result = await userService.delete(userId)
         return res.json({user, result})
-    }catch (e:Error|any) {
-        res.send(e)
+    }catch (e: Error|any){
+        res.status(500).send(e)
     }
 })
 

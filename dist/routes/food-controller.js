@@ -20,19 +20,29 @@ const router = express_1.default.Router();
 exports.FoodController = router;
 const foodService = new food_service_1.FoodService();
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, cal } = req.body;
-    const food = new food_entity_1.FoodEntity();
-    food.foodName = name;
-    food.cal = cal;
-    const result = yield foodService.insert(food);
-    return res.json(result);
+    try {
+        const { name, cal } = req.body;
+        const food = new food_entity_1.FoodEntity();
+        food.foodName = name;
+        food.cal = cal;
+        const result = yield foodService.insert(food);
+        return res.json(result);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
 }));
 router.delete("/:foodId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { foodId } = req.params;
-    const food = yield foodService.find(foodId);
-    if (!food) {
-        return res.status(404).send("food does not exist!");
+    try {
+        const { foodId } = req.params;
+        const food = yield foodService.find(foodId);
+        if (!food) {
+            return res.status(404).send("food does not exist!");
+        }
+        const result = yield foodService.delete(foodId);
+        return res.json({ result, food });
     }
-    const result = yield foodService.delete(foodId);
-    return res.json({ result, food });
+    catch (e) {
+        res.status(500).send(e);
+    }
 }));

@@ -30,17 +30,22 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.json(result);
 }));
 router.put("/:userId/new-clan/:clanId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { userId, clanId } = req.params;
-    const clan = yield clanService.find(clanId);
-    const user = yield userService.find(userId);
-    if (!clan) {
-        return res.status(404).send("clan does not exist!");
+    try {
+        const { userId, clanId } = req.params;
+        const clan = yield clanService.find(clanId);
+        const user = yield userService.find(userId);
+        if (!clan) {
+            return res.status(404).send("clan does not exist!");
+        }
+        if (!user) {
+            return res.status(404).send("user does not exist!");
+        }
+        const result = yield userService.addClan(user, clan);
+        return res.json(result);
     }
-    if (!user) {
-        return res.status(404).send("user does not exist!");
+    catch (e) {
+        res.status(500).send(e);
     }
-    const result = yield userService.addClan(user, clan);
-    return res.json(result);
 }));
 router.delete("/:userId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -53,6 +58,6 @@ router.delete("/:userId", (req, res) => __awaiter(void 0, void 0, void 0, functi
         return res.json({ user, result });
     }
     catch (e) {
-        res.send(e);
+        res.status(500).send(e);
     }
 }));

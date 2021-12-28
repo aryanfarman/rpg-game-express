@@ -26,50 +26,70 @@ const heroService = new hero_service_1.HeroService();
 const foodService = new food_service_1.FoodService();
 const workerService = new worker_service_1.WorkerService();
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { clanName } = req.body;
-    const clan = new clan_entity_1.ClanEntity();
-    clan.clanName = clanName;
-    const result = yield clanService.insert(clan);
-    return res.json(result);
+    try {
+        const { clanName } = req.body;
+        const clan = new clan_entity_1.ClanEntity();
+        clan.clanName = clanName;
+        const result = yield clanService.insert(clan);
+        return res.json(result);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
 }));
 router.put("/:clanId/new-hero/:heroId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { clanId, heroId } = req.params;
-    const clan = yield clanService.find(clanId);
-    const hero = yield heroService.find(heroId);
-    if (!clan) {
-        res.status(404).send("clan does not exist!");
+    try {
+        const { clanId, heroId } = req.params;
+        const clan = yield clanService.find(clanId);
+        const hero = yield heroService.find(heroId);
+        if (!clan) {
+            res.status(404).send("clan does not exist!");
+        }
+        if (!hero) {
+            res.status(404).send("hero does not exist!");
+        }
+        const result = yield clanService.addHero(clan, hero);
+        return res.json(result);
     }
-    if (!hero) {
-        res.status(404).send("hero does not exist!");
+    catch (e) {
+        res.status(500).send(e);
     }
-    const result = yield clanService.addHero(clan, hero);
-    return res.json(result);
 }));
 router.put("/:clanId/new-food/:foodId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { clanId, foodId } = req.params;
-    const clan = yield clanService.find(clanId);
-    const food = yield foodService.find(foodId);
-    if (!clan) {
-        res.status(404).send("clan does not exist!");
+    try {
+        const { clanId, foodId } = req.params;
+        const clan = yield clanService.find(clanId);
+        const food = yield foodService.find(foodId);
+        if (!clan) {
+            res.status(404).send("clan does not exist!");
+        }
+        if (!food) {
+            res.status(404).send("food does not exist!");
+        }
+        const result = yield clanService.addFood(clan, food);
+        return res.json(result);
     }
-    if (!food) {
-        res.status(404).send("food does not exist!");
+    catch (e) {
+        res.status(500).send(e);
     }
-    const result = yield clanService.addFood(clan, food);
-    return res.json(result);
 }));
 router.put("/:clanId/new-worker/:workerId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { clanId, workerId } = req.params;
-    const clan = yield clanService.find(clanId);
-    const worker = yield workerService.find(workerId);
-    if (!clan) {
-        res.status(404).send("clan does not exist!");
+    try {
+        const { clanId, workerId } = req.params;
+        const clan = yield clanService.find(clanId);
+        const worker = yield workerService.find(workerId);
+        if (!clan) {
+            res.status(404).send("clan does not exist!");
+        }
+        if (!worker) {
+            res.status(404).send("worker does not exist");
+        }
+        const result = yield clanService.addWorker(clan, worker);
+        return res.json(result);
     }
-    if (!worker) {
-        res.status(404).send("worker does not exist");
+    catch (e) {
+        res.status(500).send(e);
     }
-    const result = yield clanService.addWorker(clan, worker);
-    return res.json(result);
 }));
 router.delete("/:clanId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
