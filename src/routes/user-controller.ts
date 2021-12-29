@@ -14,6 +14,22 @@ router.post("/",async (req,res)=>{
     const result = await userService.insert(user)
     return res.json(result)
 })
+router.put("/:userId",async (req,res)=>{
+    try{
+        const {userName, mail} = req.body;
+        const {userId} = req.params
+        let user = await userService.find(userId)
+        if (!user) {
+            return res.status(404).send("user does not exist!")
+        }
+        user = await userService.updateUser(userId, userName, mail)
+        return res.json(user)
+    }catch (e:Error|any) {
+        res.status(500).send(e)
+    }
+})
+
+
 router.put("/:userId/new-clan/:clanId",async (req,res)=>{
     try {
 

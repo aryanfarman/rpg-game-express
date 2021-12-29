@@ -25,6 +25,16 @@ class UserService {
             });
         });
     }
+    updateUser(userId, userName, userMail) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const user = yield user_entity_1.UserEntity.findOne(userId, {
+                relations: ["clans"]
+            });
+            user.name = userName;
+            user.email = userMail;
+            return yield user.save();
+        });
+    }
     addClan(user, clan) {
         return __awaiter(this, void 0, void 0, function* () {
             if (user.clans != undefined) {

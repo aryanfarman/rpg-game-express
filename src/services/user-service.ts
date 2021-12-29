@@ -6,12 +6,20 @@ export class UserService{
     async insert(data:UserEntity){
         const user = await UserEntity.create(data)
         return await user.save();
-
     }
     async find(id:string){
         return await UserEntity.findOne(id,{
             relations:["clans"]
         });
+    }
+    async updateUser(userId:string,userName:string,userMail:string){
+        const user= await UserEntity.findOne(userId,{
+            relations : ["clans"]
+        })
+        user.name=userName
+        user.email=userMail
+        return await user.save()
+
     }
     async addClan(user:UserEntity,clan:ClanEntity){
         if(user.clans != undefined){
@@ -20,7 +28,6 @@ export class UserService{
             user.clans = [clan]
         }
         return await user.save()
-
     }
     async delete(id:string){
         return await UserEntity.delete(id)

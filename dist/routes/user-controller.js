@@ -29,6 +29,21 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield userService.insert(user);
     return res.json(result);
 }));
+router.put("/:userId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { userName, mail } = req.body;
+        const { userId } = req.params;
+        let user = yield userService.find(userId);
+        if (!user) {
+            return res.status(404).send("user does not exist!");
+        }
+        user = yield userService.updateUser(userId, userName, mail);
+        return res.json(user);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+}));
 router.put("/:userId/new-clan/:clanId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { userId, clanId } = req.params;
