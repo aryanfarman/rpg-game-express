@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const user_entity_1 = require("../entities/user-entity");
+const typeorm_1 = require("typeorm");
 class UserService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -49,6 +50,26 @@ class UserService {
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield user_entity_1.UserEntity.delete(id);
+        });
+    }
+    findAll(userName = undefined, userId = undefined) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (userName != undefined) {
+                return yield user_entity_1.UserEntity.find({
+                    where: {
+                        name: (0, typeorm_1.Like)(`%${userName}%`)
+                    },
+                    relations: ["clans"]
+                });
+            }
+            else {
+                return yield user_entity_1.UserEntity.find({
+                    where: {
+                        userId: userId
+                    },
+                    relations: ["clans"]
+                });
+            }
         });
     }
 }

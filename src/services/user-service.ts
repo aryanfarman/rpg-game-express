@@ -1,5 +1,6 @@
 import {UserEntity} from "../entities/user-entity";
 import {ClanEntity} from "../entities/clan-entity";
+import {Like} from "typeorm";
 
 
 export class UserService{
@@ -32,6 +33,22 @@ export class UserService{
     async delete(id:string){
         return await UserEntity.delete(id)
     }
-
+    async findAll(userName:string|undefined=undefined,userId: string|undefined = undefined){
+        if(userName != undefined){
+            return await UserEntity.find({
+                where: {
+                  name: Like(`%${userName}%`)
+                },
+                relations : ["clans"]
+            })
+        }else{
+            return await UserEntity.find({
+                where: {
+                    userId: userId
+                },
+                relations : ["clans"]
+            })
+        }
+    }
 
 }

@@ -76,3 +76,19 @@ router.delete("/:userId", (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.status(500).send(e);
     }
 }));
+router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { name, id } = req.query;
+        if ((name && !id) || (!name && !id)) {
+            const users = yield userService.findAll((name || ""));
+            return res.json(users);
+        }
+        else {
+            const user = yield userService.findAll(undefined, id);
+            return res.json(user);
+        }
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+}));

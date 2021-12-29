@@ -62,5 +62,19 @@ router.delete("/:userId",async (req,res)=>{
     }
 })
 
+router.get("/",async (req,res)=>{
+    try{
+        const {name, id} = req.query
+        if((name && !id) || (!name && !id)){
+            const users =await userService.findAll((name || "") as string)
+            return res.json(users)
+        }else {
+            const user = await userService.findAll(undefined,id as string)
+            return res.json(user)
+        }
+    }catch (e: Error|any){
+        res.status(500).send(e)
+    }
+})
 
 export {router as UserController}
