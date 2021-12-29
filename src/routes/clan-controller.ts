@@ -94,4 +94,23 @@ router.delete("/:clanId",async (req,res)=>{
     }
 
 })
+router.get("/",async (req,res)=>{
+    try{
+        const {name, id} = req.query
+        if(name && !id || !name && !id){
+            const clans =await clanService.findAll((name || "") as string)
+            return res.json(clans)
+        }else {
+            const clan = await clanService.findAll(undefined,id as string)
+            return res.json(clan)
+        }
+
+
+    }catch (e: Error|any){
+        res.status(500).send(e)
+    }
+
+
+})
+
 export {router as ClanController}

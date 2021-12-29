@@ -2,6 +2,7 @@ import {ClanEntity} from "../entities/clan-entity";
 import {HeroEntity} from "../entities/hero-entity";
 import {FoodEntity} from "../entities/food-entity";
 import {WorkerEntity} from "../entities/worker-entity";
+import {Like} from "typeorm";
 
 
 export class ClanService{
@@ -9,6 +10,44 @@ export class ClanService{
         const clan = ClanEntity.create(data)
         const res = await clan.save()
         return res;
+
+    }
+    async findAll(clanName:string|undefined=undefined,clanId: string|undefined = undefined){
+        if(clanName != undefined){
+            const clans = await ClanEntity.find({
+
+                where :{
+                    clanName : Like(`%${clanName}%`)
+                },
+                join : {
+                    alias : "clan",
+                    leftJoinAndSelect : {
+                        army : "clan.army",
+                        foods : "clan.foods",
+                        workers : "clan.workers"
+                    }
+                },
+                relations : ["userFk"]
+            })
+            return clans
+        }else{
+            const clan = await ClanEntity.find({
+                where : {
+                    clanId : clanId
+                },
+                join : {
+                    alias : "clan",
+                    leftJoinAndSelect : {
+                        army : "clan.army",
+                        foods : "clan.foods",
+                        workers : "clan.workers"
+                    }
+                },
+                relations : ["userFk"]
+            })
+            return clan
+        }
+
 
     }
     async find(id:string){

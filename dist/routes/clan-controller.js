@@ -105,3 +105,19 @@ router.delete("/:clanId", (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.status(500).send(e);
     }
 }));
+router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { name, id } = req.query;
+        if (name && !id || !name && !id) {
+            const clans = yield clanService.findAll((name || ""));
+            return res.json(clans);
+        }
+        else {
+            const clan = yield clanService.findAll(undefined, id);
+            return res.json(clan);
+        }
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+}));

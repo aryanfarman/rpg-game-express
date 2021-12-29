@@ -11,12 +11,51 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClanService = void 0;
 const clan_entity_1 = require("../entities/clan-entity");
+const typeorm_1 = require("typeorm");
 class ClanService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {
             const clan = clan_entity_1.ClanEntity.create(data);
             const res = yield clan.save();
             return res;
+        });
+    }
+    findAll(clanName = undefined, clanId = undefined) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (clanName != undefined) {
+                const clans = yield clan_entity_1.ClanEntity.find({
+                    where: {
+                        clanName: (0, typeorm_1.Like)(`%${clanName}%`)
+                    },
+                    join: {
+                        alias: "clan",
+                        leftJoinAndSelect: {
+                            army: "clan.army",
+                            foods: "clan.foods",
+                            workers: "clan.workers"
+                        }
+                    },
+                    relations: ["userFk"]
+                });
+                return clans;
+            }
+            else {
+                const clan = yield clan_entity_1.ClanEntity.find({
+                    where: {
+                        clanId: clanId
+                    },
+                    join: {
+                        alias: "clan",
+                        leftJoinAndSelect: {
+                            army: "clan.army",
+                            foods: "clan.foods",
+                            workers: "clan.workers"
+                        }
+                    },
+                    relations: ["userFk"]
+                });
+                return clan;
+            }
         });
     }
     find(id) {
