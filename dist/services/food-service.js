@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FoodService = void 0;
 const food_entity_1 = require("../entities/food-entity");
+const typeorm_1 = require("typeorm");
 class FoodService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -22,6 +23,46 @@ class FoodService {
         return __awaiter(this, void 0, void 0, function* () {
             const food = yield food_entity_1.FoodEntity.findOne(id);
             return food;
+        });
+    }
+    updateFood(food, foodName, foodCal) {
+        return __awaiter(this, void 0, void 0, function* () {
+            food.foodName = foodName;
+            food.cal = foodCal;
+            return yield food.save();
+        });
+    }
+    findAll(cal, name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!name && !cal) {
+                return yield food_entity_1.FoodEntity.find({
+                    where: {
+                        foodName: (0, typeorm_1.Like)(`%%`)
+                    }
+                });
+            }
+            else if (cal && !name) {
+                return yield food_entity_1.FoodEntity.find({
+                    where: {
+                        cal: (0, typeorm_1.Equal)(cal)
+                    }
+                });
+            }
+            else if (!cal && name) {
+                return yield food_entity_1.FoodEntity.find({
+                    where: {
+                        foodName: (0, typeorm_1.Like)(`%${name}%`)
+                    }
+                });
+            }
+            else {
+                return yield food_entity_1.FoodEntity.find({
+                    where: {
+                        foodName: (0, typeorm_1.Like)(`%${name}%`),
+                        cal: (0, typeorm_1.Equal)(cal)
+                    }
+                });
+            }
         });
     }
     delete(id) {

@@ -32,6 +32,31 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).send(e);
     }
 }));
+router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { name, cal } = req.body;
+        const { id } = req.params;
+        let food = yield foodService.find(id);
+        if (!food) {
+            return res.status(404).send("food does not found!");
+        }
+        food = yield foodService.updateFood(food, name, cal);
+        return res.json(food);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+}));
+router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { cal, name } = req.query;
+        const foods = yield foodService.findAll(parseInt(cal), name);
+        return res.json(foods);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+}));
 router.delete("/:foodId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { foodId } = req.params;
