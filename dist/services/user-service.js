@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
-const user_entity_1 = require("../entities/user-entity");
+const user_entity_1 = require("../entity/user-entity");
 const typeorm_1 = require("typeorm");
 class UserService {
     insert(data) {

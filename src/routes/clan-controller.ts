@@ -1,6 +1,6 @@
 import express from "express";
 import {ClanService} from "../services/clan-service";
-import {ClanEntity} from "../entities/clan-entity";
+import {ClanEntity} from "../entity/clan-entity";
 import {HeroService} from "../services/hero-service";
 import {FoodService} from "../services/food-service";
 import {WorkerService} from "../services/worker-service";

@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FoodController = void 0;
 const express_1 = __importDefault(require("express"));
-const food_entity_1 = require("../entities/food-entity");
+const food_entity_1 = require("../entity/food-entity");
 const food_service_1 = require("../services/food-service");
 const router = express_1.default.Router();
 exports.FoodController = router;

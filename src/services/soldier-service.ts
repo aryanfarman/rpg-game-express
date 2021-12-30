@@ -1,5 +1,5 @@
-import {SoldierEntity} from "../entities/soldier-entity";
-import {HeroEntity} from "../entities/hero-entity";
+import {SoldierEntity} from "../entity/soldier-entity";
+import {HeroEntity} from "../entity/hero-entity";
 import {Like} from "typeorm";
 
 export class SoldierService{

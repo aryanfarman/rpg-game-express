@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClanController = void 0;
 const express_1 = __importDefault(require("express"));
 const clan_service_1 = require("../services/clan-service");
-const clan_entity_1 = require("../entities/clan-entity");
+const clan_entity_1 = require("../entity/clan-entity");
 const hero_service_1 = require("../services/hero-service");
 const food_service_1 = require("../services/food-service");
 const worker_service_1 = require("../services/worker-service");

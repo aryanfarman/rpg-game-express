@@ -15,15 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = require("dotenv");
 const typeorm_1 = require("typeorm");
 const express_1 = __importDefault(require("express"));
-const hero_entity_1 = require("./entities/hero-entity");
-const archer_entity_1 = require("./entities/archer-entity");
-const knight_entity_1 = require("./entities/knight-entity");
-const soldier_entity_1 = require("./entities/soldier-entity");
-const clan_entity_1 = require("./entities/clan-entity");
-const food_entity_1 = require("./entities/food-entity");
-const worker_entity_1 = require("./entities/worker-entity");
-const war_entity_1 = require("./entities/war-entity");
-const user_entity_1 = require("./entities/user-entity");
 const clan_controller_1 = require("./routes/clan-controller");
 const user_controller_1 = require("./routes/user-controller");
 const worker_controller_1 = require("./routes/worker-controller");
@@ -49,7 +40,7 @@ const app = (0, express_1.default)();
                 trustServerCertificate: true
             },
             synchronize: true,
-            entities: [hero_entity_1.HeroEntity, clan_entity_1.ClanEntity, food_entity_1.FoodEntity, archer_entity_1.ArcherEntity, knight_entity_1.KnightEntity, soldier_entity_1.SoldierEntity, worker_entity_1.WorkerEntity, war_entity_1.WarEntity, user_entity_1.UserEntity]
+            entities: ["src/entity/*.ts"]
         });
         console.log("database connected !");
         app.use(express_1.default.json());

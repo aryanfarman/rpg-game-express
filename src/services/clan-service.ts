@@ -1,11 +1,11 @@
-import {ClanEntity} from "../entities/clan-entity";
-import {HeroEntity} from "../entities/hero-entity";
-import {FoodEntity} from "../entities/food-entity";
-import {WorkerEntity} from "../entities/worker-entity";
+import {ClanEntity} from "../entity/clan-entity";
+import {HeroEntity} from "../entity/hero-entity";
+import {FoodEntity} from "../entity/food-entity";
+import {WorkerEntity} from "../entity/worker-entity";
 import {Like} from "typeorm";
-import {ArcherEntity} from "../entities/archer-entity";
-import {SoldierEntity} from "../entities/soldier-entity";
-import {KnightEntity} from "../entities/knight-entity";
+import {ArcherEntity} from "../entity/archer-entity";
+import {SoldierEntity} from "../entity/soldier-entity";
+import {KnightEntity} from "../entity/knight-entity";
 
 
 export class ClanService{

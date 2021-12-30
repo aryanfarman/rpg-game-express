@@ -1,6 +1,6 @@
 import express from "express";
 import {UserService} from "../services/user-service";
-import {UserEntity} from "../entities/user-entity";
+import {UserEntity} from "../entity/user-entity";
 import {ClanService} from "../services/clan-service";
 
 const router = express.Router()

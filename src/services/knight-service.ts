@@ -1,5 +1,5 @@
-import {KnightEntity} from "../entities/knight-entity";
-import {HeroEntity} from "../entities/hero-entity";
+import {KnightEntity} from "../entity/knight-entity";
+import {HeroEntity} from "../entity/hero-entity";
 import {Like} from "typeorm";
 
 export class KnightService{

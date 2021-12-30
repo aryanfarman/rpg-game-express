@@ -1,4 +1,4 @@
-import {HeroEntity} from "../entities/hero-entity";
+import {HeroEntity} from "../entity/hero-entity";
 
 
 

@@ -1,15 +1,15 @@
 import {config} from "dotenv"
 import {createConnection} from "typeorm";
 import express from "express"
-import {HeroEntity} from "./entities/hero-entity";
-import {ArcherEntity} from "./entities/archer-entity";
-import {KnightEntity} from "./entities/knight-entity";
-import {SoldierEntity} from "./entities/soldier-entity";
-import {ClanEntity} from "./entities/clan-entity";
-import {FoodEntity} from "./entities/food-entity";
-import {WorkerEntity} from "./entities/worker-entity";
-import {WarEntity} from "./entities/war-entity";
-import {UserEntity} from "./entities/user-entity";
+import {HeroEntity} from "./entity/hero-entity";
+import {ArcherEntity} from "./entity/archer-entity";
+import {KnightEntity} from "./entity/knight-entity";
+import {SoldierEntity} from "./entity/soldier-entity";
+import {ClanEntity} from "./entity/clan-entity";
+import {FoodEntity} from "./entity/food-entity";
+import {WorkerEntity} from "./entity/worker-entity";
+import {WarEntity} from "./entity/war-entity";
+import {UserEntity} from "./entity/user-entity";
 import {ClanController} from "./routes/clan-controller";
 import {UserController} from "./routes/user-controller";
 import {WorkerController} from "./routes/worker-controller";
@@ -40,7 +40,7 @@ config();
                 trustServerCertificate : true
             },
             synchronize : true ,
-            entities : [HeroEntity,ClanEntity,FoodEntity,ArcherEntity,KnightEntity,SoldierEntity,WorkerEntity,WarEntity,UserEntity]
+            entities : ["src/entity/*.ts"]
         })
         console.log("database connected !");
         app.use(express.json())

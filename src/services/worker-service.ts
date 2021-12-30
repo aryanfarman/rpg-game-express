@@ -1,4 +1,4 @@
-import {WorkerEntity} from "../entities/worker-entity";
+import {WorkerEntity} from "../entity/worker-entity";
 import {Equal} from "typeorm";
 
 export class WorkerService{

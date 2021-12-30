@@ -1,4 +1,4 @@
-import {WarEntity} from "../entities/war-entity";
+import {WarEntity} from "../entity/war-entity";
 import {Equal, Like} from "typeorm";
 
 

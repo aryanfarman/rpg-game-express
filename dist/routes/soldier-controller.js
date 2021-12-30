@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SoldierController = void 0;
 const express_1 = __importDefault(require("express"));
-const soldier_entity_1 = require("../entities/soldier-entity");
+const soldier_entity_1 = require("../entity/soldier-entity");
 const soldier_service_1 = require("../services/soldier-service");
 const hero_service_1 = require("../services/hero-service");
 const router = express_1.default.Router();

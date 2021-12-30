@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WarController = void 0;
 const express_1 = __importDefault(require("express"));
 const war_service_1 = require("../services/war-service");
-const war_entity_1 = require("../entities/war-entity");
+const war_entity_1 = require("../entity/war-entity");
 const router = express_1.default.Router();
 exports.WarController = router;
 const warService = new war_service_1.WarService();
@@ -41,6 +41,14 @@ router.put("/:warId", (req, res) => __awaiter(void 0, void 0, void 0, function* 
         }
         war = yield warService.updateWar(war, location);
         return res.json(war);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+}));
+router.put("/:clanId1/warId/:clanId2", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { clanId1, clanId2 } = req.params;
     }
     catch (e) {
         res.status(500).send(e);

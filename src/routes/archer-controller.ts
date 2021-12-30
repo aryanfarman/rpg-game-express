@@ -1,5 +1,5 @@
 import express from "express";
-import {ArcherEntity} from "../entities/archer-entity";
+import {ArcherEntity} from "../entity/archer-entity";
 import {ArcherService} from "../services/archer-service";
 import {HeroService} from "../services/hero-service";
 

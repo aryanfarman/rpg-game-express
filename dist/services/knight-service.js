@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.KnightService = void 0;
-const knight_entity_1 = require("../entities/knight-entity");
-const hero_entity_1 = require("../entities/hero-entity");
+const knight_entity_1 = require("../entity/knight-entity");
+const hero_entity_1 = require("../entity/hero-entity");
 const typeorm_1 = require("typeorm");
 class KnightService {
     insert(data) {

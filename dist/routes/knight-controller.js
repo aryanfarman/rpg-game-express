@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.KnightController = void 0;
 const express_1 = __importDefault(require("express"));
 const knight_service_1 = require("../services/knight-service");
-const knight_entity_1 = require("../entities/knight-entity");
+const knight_entity_1 = require("../entity/knight-entity");
 const hero_service_1 = require("../services/hero-service");
 const router = express_1.default.Router();
 exports.KnightController = router;

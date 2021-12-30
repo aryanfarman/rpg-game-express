@@ -1,5 +1,5 @@
 import express from "express";
-import {SoldierEntity} from "../entities/soldier-entity";
+import {SoldierEntity} from "../entity/soldier-entity";
 import {SoldierService} from "../services/soldier-service";
 import {HeroService} from "../services/hero-service";
 const router = express.Router()

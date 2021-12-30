@@ -1,5 +1,5 @@
-import {ArcherEntity} from "../entities/archer-entity";
-import {HeroEntity} from "../entities/hero-entity";
+import {ArcherEntity} from "../entity/archer-entity";
+import {HeroEntity} from "../entity/hero-entity";
 import {Like} from "typeorm";
 
 export class ArcherService{

@@ -10,12 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClanService = void 0;
-const clan_entity_1 = require("../entities/clan-entity");
-const hero_entity_1 = require("../entities/hero-entity");
+const clan_entity_1 = require("../entity/clan-entity");
+const hero_entity_1 = require("../entity/hero-entity");
 const typeorm_1 = require("typeorm");
-const archer_entity_1 = require("../entities/archer-entity");
-const soldier_entity_1 = require("../entities/soldier-entity");
-const knight_entity_1 = require("../entities/knight-entity");
+const archer_entity_1 = require("../entity/archer-entity");
+const soldier_entity_1 = require("../entity/soldier-entity");
+const knight_entity_1 = require("../entity/knight-entity");
 class ClanService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {

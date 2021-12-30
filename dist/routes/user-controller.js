@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const express_1 = __importDefault(require("express"));
 const user_service_1 = require("../services/user-service");
-const user_entity_1 = require("../entities/user-entity");
+const user_entity_1 = require("../entity/user-entity");
 const clan_service_1 = require("../services/clan-service");
 const router = express_1.default.Router();
 exports.UserController = router;

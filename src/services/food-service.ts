@@ -1,4 +1,4 @@
-import {FoodEntity} from "../entities/food-entity";
+import {FoodEntity} from "../entity/food-entity";
 import {Equal, Like} from "typeorm";
 
 

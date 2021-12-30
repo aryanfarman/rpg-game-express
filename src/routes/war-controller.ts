@@ -1,6 +1,6 @@
 import express from "express";
 import {WarService} from "../services/war-service";
-import {WarEntity} from "../entities/war-entity";
+import {WarEntity} from "../entity/war-entity";
 
 const router = express.Router()
 const warService = new WarService()
@@ -28,6 +28,17 @@ router.put("/:warId",async (req,res)=>{
     }catch (e:Error|any) {
         res.status(500).send(e)
     }
+})
+router.put("/:clanId1/warId/:clanId2",async (req,res)=>{
+
+    try {
+        const {clanId1,clanId2}=req.params
+
+
+    }catch (e:Error|any) {
+        res.status(500).send(e)
+    }
+
 })
 router.get("/",async (req,res)=>{
     try{

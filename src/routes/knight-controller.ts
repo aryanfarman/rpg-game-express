@@ -1,6 +1,6 @@
 import express from "express";
 import {KnightService} from "../services/knight-service";
-import {KnightEntity} from "../entities/knight-entity";
+import {KnightEntity} from "../entity/knight-entity";
 import {HeroService} from "../services/hero-service";
 
 const router = express.Router()

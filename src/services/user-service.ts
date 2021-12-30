@@ -1,5 +1,5 @@
-import {UserEntity} from "../entities/user-entity";
-import {ClanEntity} from "../entities/clan-entity";
+import {UserEntity} from "../entity/user-entity";
+import {ClanEntity} from "../entity/clan-entity";
 import {Like} from "typeorm";
 
 
