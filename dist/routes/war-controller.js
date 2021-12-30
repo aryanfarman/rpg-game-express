@@ -16,9 +16,11 @@ exports.WarController = void 0;
 const express_1 = __importDefault(require("express"));
 const war_service_1 = require("../services/war-service");
 const war_entity_1 = require("../entity/war-entity");
+const clan_service_1 = require("../services/clan-service");
 const router = express_1.default.Router();
 exports.WarController = router;
 const warService = new war_service_1.WarService();
+const clanService = new clan_service_1.ClanService();
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { location } = req.body;
@@ -41,14 +43,6 @@ router.put("/:warId", (req, res) => __awaiter(void 0, void 0, void 0, function* 
         }
         war = yield warService.updateWar(war, location);
         return res.json(war);
-    }
-    catch (e) {
-        res.status(500).send(e);
-    }
-}));
-router.put("/:clanId1/warId/:clanId2", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { clanId1, clanId2 } = req.params;
     }
     catch (e) {
         res.status(500).send(e);

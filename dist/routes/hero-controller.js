@@ -12,12 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HeroController = void 0;
 const express_1 = __importDefault(require("express"));
 const hero_service_1 = require("../services/hero-service");
 const hero_entity_1 = require("../entity/hero-entity");
 const router = express_1.default.Router();
-exports.HeroController = router;
 const heroService = new hero_service_1.HeroService();
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

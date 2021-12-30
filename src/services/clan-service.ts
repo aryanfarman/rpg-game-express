@@ -11,8 +11,7 @@ import {KnightEntity} from "../entity/knight-entity";
 export class ClanService{
     async insert(data : ClanEntity){
         const clan = ClanEntity.create(data)
-        const res = await clan.save()
-        return res;
+        return await clan.save();
 
     }
     async findAll(clanName:string,clanId: string){
@@ -68,10 +67,9 @@ export class ClanService{
 
     }
     async find(id:string){
-        const clan = ClanEntity.findOne(id,{
-            relations : ["army","foods","workers"]
+        return await ClanEntity.findOne(id, {
+            relations: ["army", "foods", "workers"]
         })
-        return clan
     }
     async addHero(clan:ClanEntity,hero:HeroEntity){
         if(clan.army != undefined){

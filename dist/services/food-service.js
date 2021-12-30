@@ -21,8 +21,7 @@ class FoodService {
     }
     find(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const food = yield food_entity_1.FoodEntity.findOne(id);
-            return food;
+            return yield food_entity_1.FoodEntity.findOne(id);
         });
     }
     updateFood(food, foodName, foodCal) {

@@ -4,9 +4,7 @@ import {
     Entity,
     JoinColumn,
     ManyToOne,
-    OneToMany,
     PrimaryGeneratedColumn,
-    TableInheritance
 } from "typeorm";
 import {ClanEntity} from "./clan-entity";
 @Entity("Hero")
@@ -39,9 +37,5 @@ export class HeroEntity extends BaseEntity{
     @JoinColumn({
         name:"ClanFK"
     })clanFk: ClanEntity;
-
-
-
-
 
 }

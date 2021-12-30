@@ -1,9 +1,11 @@
 import express from "express";
 import {WarService} from "../services/war-service";
 import {WarEntity} from "../entity/war-entity";
+import {ClanService} from "../services/clan-service";
 
 const router = express.Router()
 const warService = new WarService()
+const clanService = new ClanService()
 router.post("/",async (req,res)=>{
     try{
         const {location} = req.body
@@ -29,17 +31,7 @@ router.put("/:warId",async (req,res)=>{
         res.status(500).send(e)
     }
 })
-router.put("/:clanId1/warId/:clanId2",async (req,res)=>{
 
-    try {
-        const {clanId1,clanId2}=req.params
-
-
-    }catch (e:Error|any) {
-        res.status(500).send(e)
-    }
-
-})
 router.get("/",async (req,res)=>{
     try{
         const {location, id} = req.query

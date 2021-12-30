@@ -20,8 +20,7 @@ class ClanService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {
             const clan = clan_entity_1.ClanEntity.create(data);
-            const res = yield clan.save();
-            return res;
+            return yield clan.save();
         });
     }
     findAll(clanName, clanId) {
@@ -78,10 +77,9 @@ class ClanService {
     }
     find(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const clan = clan_entity_1.ClanEntity.findOne(id, {
+            return yield clan_entity_1.ClanEntity.findOne(id, {
                 relations: ["army", "foods", "workers"]
             });
-            return clan;
         });
     }
     addHero(clan, hero) {

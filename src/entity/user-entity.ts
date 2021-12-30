@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {ClanEntity} from "./clan-entity";
 
 @Entity("User")

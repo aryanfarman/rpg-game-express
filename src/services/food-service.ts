@@ -10,8 +10,7 @@ export class FoodService{
     }
 
     async find(id:string){
-        const food = await FoodEntity.findOne(id)
-        return food
+        return await FoodEntity.findOne(id)
     }
     async updateFood(food:FoodEntity,foodName:string,foodCal:number){
         food.foodName=foodName
