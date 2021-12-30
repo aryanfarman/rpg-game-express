@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SoldierService = void 0;
 const soldier_entity_1 = require("../entities/soldier-entity");
 const hero_entity_1 = require("../entities/hero-entity");
+const typeorm_1 = require("typeorm");
 class SoldierService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -22,6 +23,46 @@ class SoldierService {
     find(id) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield soldier_entity_1.SoldierEntity.findOne(id);
+        });
+    }
+    updateSoldier(soldier, name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            soldier.heroName = name;
+            let hero = yield hero_entity_1.HeroEntity.findOne(soldier.heroId);
+            hero.heroName = soldier.heroName;
+            return {
+                archerRes: yield soldier.save(),
+                heroRes: yield hero.save()
+            };
+        });
+    }
+    findAll(name, id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (name && id) {
+                return yield soldier_entity_1.SoldierEntity.find({
+                    where: {
+                        heroName: (0, typeorm_1.Like)(`%${name}%`),
+                        heroId: id
+                    }, relations: ["clanFk"]
+                });
+            }
+            else if (!name && id) {
+                return yield soldier_entity_1.SoldierEntity.findOne(id, { relations: ["clanFk"] });
+            }
+            else if (name && !id) {
+                return yield soldier_entity_1.SoldierEntity.find({
+                    where: {
+                        heroName: (0, typeorm_1.Like)(`%${name}%`)
+                    }, relations: ["clanFk"]
+                });
+            }
+            else {
+                return yield soldier_entity_1.SoldierEntity.find({
+                    where: {
+                        heroName: (0, typeorm_1.Like)(`%%`)
+                    }, relations: ["clanFk"]
+                });
+            }
         });
     }
     delete(id) {

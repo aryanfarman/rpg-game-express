@@ -44,9 +44,6 @@ router.get("/",async (req,res)=>{
     }catch (e:Error|any){
         return res.status(500).send(e)
     }
-
-
-
 })
 
 router.delete("/:heroId",async (req,res)=>{

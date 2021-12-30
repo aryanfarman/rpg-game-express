@@ -34,6 +34,31 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).send(e);
     }
 }));
+router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { name } = yield req.body;
+        const { id } = yield req.params;
+        const soldier = yield soldierService.find(id);
+        if (!soldier) {
+            return res.status(404).send("soldier does not exist!");
+        }
+        const result = yield soldierService.updateSoldier(soldier, name);
+        return res.json(result);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+}));
+router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { name, id } = yield req.query;
+        const soldiers = yield soldierService.findAll(name, id);
+        return res.json(soldiers);
+    }
+    catch (e) {
+        return res.status(500).send(e);
+    }
+}));
 router.delete("/:heroId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { heroId } = req.params;
