@@ -52,12 +52,20 @@ class UserService {
             return yield user_entity_1.UserEntity.delete(id);
         });
     }
-    findAll(userName = undefined, userId = undefined) {
+    findAll(userName, userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (userName != undefined) {
+            if (userName && !userId) {
                 return yield user_entity_1.UserEntity.find({
                     where: {
                         name: (0, typeorm_1.Like)(`%${userName}%`)
+                    },
+                    relations: ["clans"]
+                });
+            }
+            else if (!userName && !userId) {
+                return yield user_entity_1.UserEntity.find({
+                    where: {
+                        name: (0, typeorm_1.Like)(`%%`)
                     },
                     relations: ["clans"]
                 });

@@ -16,7 +16,7 @@ export class SoldierService{
         let hero = await HeroEntity.findOne(soldier.heroId)
         hero.heroName=soldier.heroName
         return{
-            archerRes: await soldier.save(),
+            soldierRes: await soldier.save(),
             heroRes: await hero.save()
         }
 

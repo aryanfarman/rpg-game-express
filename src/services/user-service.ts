@@ -33,11 +33,18 @@ export class UserService{
     async delete(id:string){
         return await UserEntity.delete(id)
     }
-    async findAll(userName:string|undefined=undefined,userId: string|undefined = undefined){
-        if(userName != undefined){
+    async findAll(userName:string,userId: string){
+        if(userName && !userId){
             return await UserEntity.find({
                 where: {
                   name: Like(`%${userName}%`)
+                },
+                relations : ["clans"]
+            })
+        }else if(!userName&&!userId){
+            return await UserEntity.find({
+                where: {
+                    name: Like(`%%`)
                 },
                 relations : ["clans"]
             })

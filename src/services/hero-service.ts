@@ -1,6 +1,7 @@
 import {HeroEntity} from "../entities/hero-entity";
 
 
+
 export class HeroService {
 
     async insert(data:HeroEntity){

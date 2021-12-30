@@ -34,6 +34,31 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).send(e);
     }
 }));
+router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { name } = yield req.body;
+        const { id } = yield req.params;
+        const knight = yield knightService.find(id);
+        if (!knight) {
+            return res.status(404).send("knight does not exist!");
+        }
+        const result = yield knightService.updateKnight(knight, name);
+        return res.json(result);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+}));
+router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { name, id } = yield req.query;
+        const knights = yield knightService.findAll(name, id);
+        return res.json(knights);
+    }
+    catch (e) {
+        return res.status(500).send(e);
+    }
+}));
 router.delete("/:heroId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { heroId } = req.params;

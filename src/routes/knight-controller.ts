@@ -19,6 +19,32 @@ router.post("/",async (req,res)=>{
     }
 
 })
+router.put("/:id",async (req,res)=>{
+    try{
+        const {name} = await req.body
+        const {id} = await req.params
+        const knight = await knightService.find(id)
+        if(!knight){
+            return res.status(404).send("knight does not exist!")
+        }
+        const result = await knightService.updateKnight(knight,name)
+        return res.json(result)
+
+    }catch (e:Error|any){
+        res.status(500).send(e)
+    }
+})
+router.get("/",async (req,res)=>{
+    try {
+        const {name , id}=await req.query
+        const knights = await knightService.findAll(name as string,id as string)
+        return res.json(knights)
+
+
+    }catch (e:Error|any){
+        return res.status(500).send(e)
+    }
+})
 router.delete("/:heroId",async (req,res)=>{
     try{
         const {heroId} = req.params

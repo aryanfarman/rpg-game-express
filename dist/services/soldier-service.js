@@ -31,7 +31,7 @@ class SoldierService {
             let hero = yield hero_entity_1.HeroEntity.findOne(soldier.heroId);
             hero.heroName = soldier.heroName;
             return {
-                archerRes: yield soldier.save(),
+                soldierRes: yield soldier.save(),
                 heroRes: yield hero.save()
             };
         });

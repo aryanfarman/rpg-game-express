@@ -1,5 +1,6 @@
 import {KnightEntity} from "../entities/knight-entity";
 import {HeroEntity} from "../entities/hero-entity";
+import {Like} from "typeorm";
 
 export class KnightService{
 
@@ -11,6 +12,40 @@ export class KnightService{
     async find(id:string){
         return await KnightEntity.findOne(id)
 
+    }
+    async updateKnight(knight:KnightEntity,name:string){
+        knight.heroName=name
+        let hero = await HeroEntity.findOne(knight.heroId)
+        hero.heroName=knight.heroName
+        return{
+            knightRes: await knight.save(),
+            heroRes: await hero.save()
+        }
+
+    }
+    async findAll(name:string,id:string){
+        if(name && id){
+            return  await KnightEntity.find({
+                where : {
+                    heroName : Like(`%${name}%`),
+                    heroId : id
+                },relations : ["clanFk"]
+            })
+        }else if(!name&&id){
+            return await KnightEntity.findOne(id,{relations:["clanFk"]})
+        }else if(name&&!id){
+            return await KnightEntity.find({
+                where: {
+                    heroName:Like(`%${name}%`)
+                },relations:["clanFk"]
+            })
+        }else {
+            return await KnightEntity.find({
+                where:{
+                    heroName:Like(`%%`)
+                },relations:["clanFk"]
+            })
+        }
     }
     async delete(id:string){
         return  {
