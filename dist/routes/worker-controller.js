@@ -27,6 +27,17 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).send(e);
     }
 }));
+//no need
+router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.query;
+        const workers = yield workerService.findAll(id);
+        return res.json(workers);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+}));
 router.delete("/:workerId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { workerId } = req.params;

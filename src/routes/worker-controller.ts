@@ -11,6 +11,21 @@ router.post("/",async (req,res)=>{
         res.status(500).send(e)
     }
 })
+//no need
+
+router.get("/",async (req,res)=>{
+    try {
+        const {id}=req.query
+        const workers= await workerService.findAll(id as string)
+        return res.json(workers)
+
+    }catch (e:Error|any){
+        res.status(500).send(e)
+    }
+
+
+})
+
 router.delete("/:workerId",async (req,res)=>{
     try{
         const {workerId} = req.params
