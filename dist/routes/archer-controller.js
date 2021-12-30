@@ -34,6 +34,31 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).send(e);
     }
 }));
+router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { bow, name } = yield req.body;
+        const { id } = yield req.params;
+        const archer = yield archerService.find(id);
+        if (!archer) {
+            return res.status(404).send("archer does not exist!");
+        }
+        const result = yield archerService.updateArcher(archer, bow, name);
+        return res.json(result);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+}));
+router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { name, id } = yield req.query;
+        const archers = yield archerService.findAll(name, id);
+        return res.json(archers);
+    }
+    catch (e) {
+        return res.status(500).send(e);
+    }
+}));
 router.delete("/:heroId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { heroId } = req.params;

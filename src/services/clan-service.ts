@@ -3,6 +3,9 @@ import {HeroEntity} from "../entities/hero-entity";
 import {FoodEntity} from "../entities/food-entity";
 import {WorkerEntity} from "../entities/worker-entity";
 import {Like} from "typeorm";
+import {ArcherEntity} from "../entities/archer-entity";
+import {SoldierEntity} from "../entities/soldier-entity";
+import {KnightEntity} from "../entities/knight-entity";
 
 
 export class ClanService{
@@ -12,40 +15,54 @@ export class ClanService{
         return res;
 
     }
-    async findAll(clanName:string|undefined=undefined,clanId: string|undefined = undefined){
-        if(clanName != undefined){
-            const clans = await ClanEntity.find({
+    async findAll(clanName:string,clanId: string){
+        if(clanName && !clanId ){
+            return await ClanEntity.find({
 
-                where :{
-                    clanName : Like(`%${clanName}%`)
+                where: {
+                    clanName: Like(`%${clanName}%`)
                 },
-                join : {
-                    alias : "clan",
-                    leftJoinAndSelect : {
-                        army : "clan.army",
-                        foods : "clan.foods",
-                        workers : "clan.workers"
+                join: {
+                    alias: "clan",
+                    leftJoinAndSelect: {
+                        army: "clan.army",
+                        foods: "clan.foods",
+                        workers: "clan.workers"
                     }
                 },
-                relations : ["userFk"]
+                relations: ["userFk"]
             })
-            return clans
+        }else if (clanId){
+            return await ClanEntity.find({
+                where: {
+                    clanId: clanId
+                },
+                join: {
+                    alias: "clan",
+                    leftJoinAndSelect: {
+                        army: "clan.army",
+                        foods: "clan.foods",
+                        workers: "clan.workers"
+                    }
+                },
+                relations: ["userFk"]
+            })
         }else{
-            const clan = await ClanEntity.find({
-                where : {
-                    clanId : clanId
+            return await ClanEntity.find({
+
+                where: {
+                    clanName: Like(`%%`)
                 },
-                join : {
-                    alias : "clan",
-                    leftJoinAndSelect : {
-                        army : "clan.army",
-                        foods : "clan.foods",
-                        workers : "clan.workers"
+                join: {
+                    alias: "clan",
+                    leftJoinAndSelect: {
+                        army: "clan.army",
+                        foods: "clan.foods",
+                        workers: "clan.workers"
                     }
                 },
-                relations : ["userFk"]
+                relations: ["userFk"]
             })
-            return clan
         }
 
 
@@ -63,7 +80,24 @@ export class ClanService{
         else{
             clan.army = [hero]
         }
-        await clan.save()
+        //for updating heroes clanFk
+        const archer= await ArcherEntity.findOne(hero.heroId)
+        const soldier= await SoldierEntity.findOne(hero.heroId)
+        const knight= await KnightEntity.findOne(hero.heroId)
+        clan=await clan.save()
+        const updatedRes=await HeroEntity.findOne(hero.heroId,{
+            relations : ["clanFk"]
+        })
+        if(archer){
+            archer.clanFk=updatedRes.clanFk
+            await archer.save()
+        }else if(soldier){
+            soldier.clanFk=updatedRes.clanFk
+            await soldier.save()
+        }else if(knight){
+            knight.clanFk=updatedRes.clanFk
+            await knight.save()
+        }
 
         return clan;
     }

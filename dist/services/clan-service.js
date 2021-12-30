@@ -11,7 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClanService = void 0;
 const clan_entity_1 = require("../entities/clan-entity");
+const hero_entity_1 = require("../entities/hero-entity");
 const typeorm_1 = require("typeorm");
+const archer_entity_1 = require("../entities/archer-entity");
+const soldier_entity_1 = require("../entities/soldier-entity");
+const knight_entity_1 = require("../entities/knight-entity");
 class ClanService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -20,10 +24,10 @@ class ClanService {
             return res;
         });
     }
-    findAll(clanName = undefined, clanId = undefined) {
+    findAll(clanName, clanId) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (clanName != undefined) {
-                const clans = yield clan_entity_1.ClanEntity.find({
+            if (clanName && !clanId) {
+                return yield clan_entity_1.ClanEntity.find({
                     where: {
                         clanName: (0, typeorm_1.Like)(`%${clanName}%`)
                     },
@@ -37,10 +41,9 @@ class ClanService {
                     },
                     relations: ["userFk"]
                 });
-                return clans;
             }
-            else {
-                const clan = yield clan_entity_1.ClanEntity.find({
+            else if (clanId) {
+                return yield clan_entity_1.ClanEntity.find({
                     where: {
                         clanId: clanId
                     },
@@ -54,7 +57,22 @@ class ClanService {
                     },
                     relations: ["userFk"]
                 });
-                return clan;
+            }
+            else {
+                return yield clan_entity_1.ClanEntity.find({
+                    where: {
+                        clanName: (0, typeorm_1.Like)(`%%`)
+                    },
+                    join: {
+                        alias: "clan",
+                        leftJoinAndSelect: {
+                            army: "clan.army",
+                            foods: "clan.foods",
+                            workers: "clan.workers"
+                        }
+                    },
+                    relations: ["userFk"]
+                });
             }
         });
     }
@@ -74,7 +92,26 @@ class ClanService {
             else {
                 clan.army = [hero];
             }
-            yield clan.save();
+            //for updating heroes clanFk
+            const archer = yield archer_entity_1.ArcherEntity.findOne(hero.heroId);
+            const soldier = yield soldier_entity_1.SoldierEntity.findOne(hero.heroId);
+            const knight = yield knight_entity_1.KnightEntity.findOne(hero.heroId);
+            clan = yield clan.save();
+            const updatedRes = yield hero_entity_1.HeroEntity.findOne(hero.heroId, {
+                relations: ["clanFk"]
+            });
+            if (archer) {
+                archer.clanFk = updatedRes.clanFk;
+                yield archer.save();
+            }
+            else if (soldier) {
+                soldier.clanFk = updatedRes.clanFk;
+                yield soldier.save();
+            }
+            else if (knight) {
+                knight.clanFk = updatedRes.clanFk;
+                yield knight.save();
+            }
             return clan;
         });
     }

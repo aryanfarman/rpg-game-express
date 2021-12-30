@@ -19,6 +19,36 @@ router.post("/",async (req,res)=>{
     }
 
 })
+router.put("/:id",async (req,res)=>{
+    try{
+        const {bow,name} = await req.body
+        const {id} = await req.params
+        const archer = await archerService.find(id)
+        if(!archer){
+            return res.status(404).send("archer does not exist!")
+        }
+        const result = await archerService.updateArcher(archer,bow,name)
+        return res.json(result)
+
+    }catch (e:Error|any){
+        res.status(500).send(e)
+    }
+})
+router.get("/",async (req,res)=>{
+    try {
+        const {name , id}=await req.query
+        const archers = await archerService.findAll(name as string,id as string)
+        return res.json(archers)
+
+
+    }catch (e:Error|any){
+        return res.status(500).send(e)
+    }
+
+
+
+})
+
 router.delete("/:heroId",async (req,res)=>{
     try{
         const {heroId} = req.params

@@ -1,5 +1,6 @@
 import {ArcherEntity} from "../entities/archer-entity";
 import {HeroEntity} from "../entities/hero-entity";
+import {Like} from "typeorm";
 
 export class ArcherService{
 
@@ -10,6 +11,41 @@ export class ArcherService{
     async find(id:string){
         return await ArcherEntity.findOne(id)
 
+    }
+    async updateArcher(archer:ArcherEntity,bow:number,name:string){
+        archer.bow=bow
+        archer.heroName=name
+        let hero = await HeroEntity.findOne(archer.heroId)
+        hero.heroName=archer.heroName
+        return{
+            archerRes: await archer.save(),
+            heroRes: await hero.save()
+        }
+
+    }
+    async findAll(name:string,id:string){
+        if(name && id){
+            return  await ArcherEntity.find({
+                where : {
+                    heroName : Like(`%${name}%`),
+                    heroId : id
+                },relations : ["clanFk"]
+            })
+        }else if(!name&&id){
+            return await ArcherEntity.findOne(id,{relations:["clanFk"]})
+        }else if(name&&!id){
+            return await ArcherEntity.find({
+                where: {
+                    heroName:Like(`%${name}%`)
+                },relations:["clanFk"]
+            })
+        }else {
+            return await ArcherEntity.find({
+                where:{
+                    heroName:Like(`%%`)
+                },relations:["clanFk"]
+            })
+        }
     }
     async delete(id:string){
        return  {
