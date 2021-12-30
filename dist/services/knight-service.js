@@ -25,9 +25,10 @@ class KnightService {
             return yield knight_entity_1.KnightEntity.findOne(id);
         });
     }
-    updateKnight(knight, name) {
+    updateKnight(knight, name, sword) {
         return __awaiter(this, void 0, void 0, function* () {
             knight.heroName = name;
+            knight.sword = sword;
             let hero = yield hero_entity_1.HeroEntity.findOne(knight.heroId);
             hero.heroName = knight.heroName;
             return {

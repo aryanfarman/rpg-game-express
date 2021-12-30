@@ -7,5 +7,5 @@ export class KnightEntity extends HeroEntity{
         name: "KnightSword",
         type: "int",
         default: 5
-    }) Sword: number
+    }) sword: number
 }

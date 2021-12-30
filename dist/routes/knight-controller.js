@@ -36,13 +36,13 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name } = yield req.body;
+        const { name, sword } = yield req.body;
         const { id } = yield req.params;
         const knight = yield knightService.find(id);
         if (!knight) {
             return res.status(404).send("knight does not exist!");
         }
-        const result = yield knightService.updateKnight(knight, name);
+        const result = yield knightService.updateKnight(knight, name, sword);
         return res.json(result);
     }
     catch (e) {

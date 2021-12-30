@@ -21,13 +21,13 @@ router.post("/",async (req,res)=>{
 })
 router.put("/:id",async (req,res)=>{
     try{
-        const {name} = await req.body
+        const {name,sword} = await req.body
         const {id} = await req.params
         const knight = await knightService.find(id)
         if(!knight){
             return res.status(404).send("knight does not exist!")
         }
-        const result = await knightService.updateKnight(knight,name)
+        const result = await knightService.updateKnight(knight,name,sword)
         return res.json(result)
 
     }catch (e:Error|any){

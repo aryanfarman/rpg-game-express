@@ -21,7 +21,7 @@ __decorate([
         default: 5
     }),
     __metadata("design:type", Number)
-], KnightEntity.prototype, "Sword", void 0);
+], KnightEntity.prototype, "sword", void 0);
 KnightEntity = __decorate([
     (0, typeorm_1.Entity)("Knight")
 ], KnightEntity);

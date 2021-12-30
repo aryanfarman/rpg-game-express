@@ -13,8 +13,9 @@ export class KnightService{
         return await KnightEntity.findOne(id)
 
     }
-    async updateKnight(knight:KnightEntity,name:string){
+    async updateKnight(knight:KnightEntity,name:string,sword:number){
         knight.heroName=name
+        knight.sword=sword
         let hero = await HeroEntity.findOne(knight.heroId)
         hero.heroName=knight.heroName
         return{
