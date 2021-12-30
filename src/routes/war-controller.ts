@@ -15,6 +15,32 @@ router.post("/",async (req,res)=>{
         res.status(500).send(e)
     }
 })
+router.put("/:warId",async (req,res)=>{
+    try{
+        const {location} = req.body;
+        const {warId} = req.params
+        let war = await warService.find(warId)
+        if (!war) {
+            return res.status(404).send("war does not exist!")
+        }
+        war = await warService.updateWar(war,location)
+        return res.json(war)
+    }catch (e:Error|any) {
+        res.status(500).send(e)
+    }
+})
+router.get("/",async (req,res)=>{
+    try{
+        const {location, id} = req.query
+        const wars =await warService.findAll(location  as string,id as string)
+        return res.json(wars)
+
+    }catch (e: Error|any){
+        res.status(500).send(e)
+    }
+})
+
+
 router.delete("/:warId",async (req,res)=>{
     try{
         const {warId} = req.params

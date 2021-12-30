@@ -31,6 +31,31 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).send(e);
     }
 }));
+router.put("/:warId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { location } = req.body;
+        const { warId } = req.params;
+        let war = yield warService.find(warId);
+        if (!war) {
+            return res.status(404).send("war does not exist!");
+        }
+        war = yield warService.updateWar(war, location);
+        return res.json(war);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+}));
+router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { location, id } = req.query;
+        const wars = yield warService.findAll(location, id);
+        return res.json(wars);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+}));
 router.delete("/:warId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { warId } = req.params;

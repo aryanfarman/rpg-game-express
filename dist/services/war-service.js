@@ -11,11 +11,46 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WarService = void 0;
 const war_entity_1 = require("../entities/war-entity");
+const typeorm_1 = require("typeorm");
 class WarService {
     insert(data) {
         return __awaiter(this, void 0, void 0, function* () {
             const war = war_entity_1.WarEntity.create(data);
             return yield war.save();
+        });
+    }
+    updateWar(war, location) {
+        return __awaiter(this, void 0, void 0, function* () {
+            war.location = location;
+            return yield war.save();
+        });
+    }
+    findAll(location, warId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (location && !warId) {
+                return yield war_entity_1.WarEntity.find({
+                    where: {
+                        location: (0, typeorm_1.Like)(`%${location}%`)
+                    },
+                    relations: ["clans"]
+                });
+            }
+            else if (!location && !warId) {
+                return yield war_entity_1.WarEntity.find({
+                    where: {
+                        location: (0, typeorm_1.Like)(`%%`)
+                    },
+                    relations: ["clans"]
+                });
+            }
+            else {
+                return yield war_entity_1.WarEntity.find({
+                    where: {
+                        warId: (0, typeorm_1.Equal)(warId)
+                    },
+                    relations: ["clans"]
+                });
+            }
         });
     }
     find(id) {
