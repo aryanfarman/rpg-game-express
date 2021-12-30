@@ -1,5 +1,6 @@
 import {WarEntity} from "../entity/war-entity";
 import {Equal, Like} from "typeorm";
+import {ClanEntity} from "../entity/clan-entity";
 
 
 export class WarService{
@@ -36,6 +37,16 @@ export class WarService{
             })
         }
     }
+    async addBattle(clans:ClanEntity[],war:WarEntity){
+        if(war.clans != undefined){
+            war.clans.push(clans[1],clans[0])
+        }else{
+            war.clans=clans
+        }
+        return await war.save()
+    }
+
+
     async find(id:string){
         return await WarEntity.findOne(id)
     }

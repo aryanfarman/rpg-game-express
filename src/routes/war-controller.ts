@@ -31,7 +31,26 @@ router.put("/:warId",async (req,res)=>{
         res.status(500).send(e)
     }
 })
+router.put("/:clanId1/:warId/:clanId2",async (req,res)=>{
 
+    try {
+        const {clanId1,clanId2,warId}=req.params
+        const clan1 = await clanService.find(clanId1)
+        const clan2 = await clanService.find(clanId2)
+        const war = await warService.find(warId)
+        if(!clan1 || !clan2){
+            res.status(404).send("clan does not exist!")
+        }if(!war){
+            res.status(404).send("war does not exist!")
+        }
+        const result = await warService.addBattle([clan1,clan2],war)
+        return res.json(result)
+
+    }catch (e:Error|any) {
+        res.status(500).send(e)
+    }
+
+})
 router.get("/",async (req,res)=>{
     try{
         const {location, id} = req.query

@@ -53,6 +53,17 @@ class WarService {
             }
         });
     }
+    addBattle(clans, war) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (war.clans != undefined) {
+                war.clans.push(clans[1], clans[0]);
+            }
+            else {
+                war.clans = clans;
+            }
+            return yield war.save();
+        });
+    }
     find(id) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield war_entity_1.WarEntity.findOne(id);

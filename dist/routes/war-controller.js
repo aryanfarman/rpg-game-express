@@ -48,6 +48,25 @@ router.put("/:warId", (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(500).send(e);
     }
 }));
+router.put("/:clanId1/:warId/:clanId2", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { clanId1, clanId2, warId } = req.params;
+        const clan1 = yield clanService.find(clanId1);
+        const clan2 = yield clanService.find(clanId2);
+        const war = yield warService.find(warId);
+        if (!clan1 || !clan2) {
+            res.status(404).send("clan does not exist!");
+        }
+        if (!war) {
+            res.status(404).send("war does not exist!");
+        }
+        const result = yield warService.addBattle([clan1, clan2], war);
+        return res.json(result);
+    }
+    catch (e) {
+        res.status(500).send(e);
+    }
+}));
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { location, id } = req.query;
